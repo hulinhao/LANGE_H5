@@ -1,0 +1,36 @@
+<!--index.wxml-->
+<view>
+  <view class="mainHeadView"> 
+       <swiper indicator-dots="{{indicatorDots}}" style='height:75px;'  
+
+           autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">  
+
+         <block wx:for="{{imgList}}">  
+
+           <swiper-item>  
+
+              <!--<navigator url="{{item.link}}" hover-class="navigator-hover"> --> 
+
+               <image src="{{item}}" class="slide-image" width="100%" style='height:75px;'/>  
+
+             <!-- </navigator> --> 
+
+           </swiper-item>  
+
+         </block>  
+
+        </swiper>  
+
+     <!-- <image class="headImage" src="{{imgList[2]}}" />-->
+  </view>
+  <!-- 分割线 -->
+  <view class="divLine"></view>
+  <view class="mainBodyView">
+    <view class="mainBodyTitleView">
+        <text class="mainTitleText">{{title}}</text>
+    </view>
+    <scroll-view scroll-y="true" bindscrolltolower="bindscrolltolower" style="height:{{tbodyHeight}}rpx">
+    <text class="mianContentText">{{content}}</text>
+    </scroll-view>
+  </view>
+</view>

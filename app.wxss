@@ -1,0 +1,45 @@
+/**app.wxss**/
+.headImage{
+  width:100%;
+  height:75px; 
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+/** 修改默认的navigator点击态 **/
+.navigator-hover {
+    color:blue;
+}
+/** 自定义其他点击态样式类 **/
+.other-navigator-hover {
+    color:red;
+}
+
+.mainHeadView{
+  height: 150rpx;
+  width: 100%;
+ /* background: #cc9393;*/
+  align-items:center;
+  justify-content:center;
+  /*display:flex;*/
+}
+
+/*分割线样式*/
+.divLine{
+  background: #f3f3f3;
+  width: 100%;
+  height: 15rpx;
+}
+/**加载中**/
+.loadView{
+  font-size: 14px;
+  color: #cc9393;
+  text-align: center;
+  max-height: 35px;
+}

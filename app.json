@@ -1,0 +1,34 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/main/index",
+    "pages/teach/index",
+    "pages/userCenter/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#e5e5e5",
+    "navigationBarTitleText": "LANGE",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "selectedColor": "#f00",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "公司简介",
+      "iconPath": "image/tab_1.png",
+      "selectedIconPath": "image/tab_1_s.png"
+    },{
+      "pagePath": "pages/teach/index",
+      "text": "师资力量",
+      "iconPath": "image/tab_2.png",
+      "selectedIconPath": "image/tab_2_s.png"
+    },{
+      "pagePath": "pages/main/index",
+      "text": "个人中心",
+      "iconPath": "image/tab_3.png",
+      "selectedIconPath": "image/tab_3_s.png"
+    }]
+  }
+}

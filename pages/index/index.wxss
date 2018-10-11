@@ -1,0 +1,19 @@
+/* pages/main/index.wxss */
+.mainBodyTitleView{
+  height:127rpx;
+  border-bottom:3px solid #f3f3f3;
+  align-items:center;
+  justify-content:center;
+  display:flex; 
+  margin: 0 5px;
+  margin-bottom: 20rpx;
+}
+.mainTitleText{
+  color:#6d6666;
+  font-weight: 400;
+}
+.mianContentText{
+  text-indent: 1.5em;
+  font-size: 14px;
+  color: #6d6666;
+}
