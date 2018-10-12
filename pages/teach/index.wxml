@@ -1,39 +1,40 @@
 <view>
   <view class="mainHeadView"> 
-   <!-- <image class="headImage" src="../../image/head.png" /> -->
-
      <swiper indicator-dots="{{indicatorDots}}" style='height:75px;'  
-
            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">  
-
+           
          <block wx:for="{{imgList}}">  
-
            <swiper-item>  
-
-              <!--<navigator url="{{item.link}}" hover-class="navigator-hover"> --> 
-
                <image src="{{item}}" class="slide-image" width="100%" style='height:75px;'/>  
-
-             <!-- </navigator> --> 
-
            </swiper-item>  
-
          </block>  
 
-        </swiper> 
+     </swiper> 
   </view>
+
   <!-- 分割线 -->
   <view class="divLine"></view>
+
   <scroll-view scroll-y="true" style="height:{{teachBodyHeight}}rpx;" bindscrolltolower="bindscrolltolower">
     <view>
-      <block wx:for-items="{{list}}">
-        <!-- 分割线 -->
-        <view class="divLine"></view>
+      <block wx:for-items="{{list}}" >
         <view class="teacherText">
-          <image class="teacherImage"  src="../../image/teacher.jpg" bindtap="showDetails" data-id="{{item.id}}"></image>       
-          <text row="3" class="teachContent" style="width:{{teachContentWidth}}px"><text>{{item.name}}：</text>{{item.explain}}</text>
-          <image class="teachAddImage"  src="../../image/add.png" bindtap="showClass" data-id="{{item.id}}"></image>
+          <image class="teacherImage"  src="../../image/teacher.jpg" bindtap="showDetails" data-id="{{item.id}}"></image>     
+          <text row="3" class="teachContent" style="width:{{teachContentWidth}}px">
+                 <text>{{item.name}},</text><text>{{item.sex == 0?'女':'男'}},</text><text>{{item.language}}教师。</text>
+                 <text>{{item.explain}}</text>
+          </text>
+          <image class="teachAddImage"  src="../../image/add.png" bindtap="showClass" data-id="{{item.id}}" 
+               wx:if="{{item.bookStatus == -1||item.bookStatus == 3}}" ></image>
+          <a class="teachAddImage"  bindtap="showClass" data-id="{{item.id}}" 
+               wx:if="{{item.bookStatus == 0}}" >支付</a>
+          <a class="teachAddImage"  bindtap="showClass" data-id="{{item.id}}" 
+               wx:if="{{item.bookStatus == 1}}" >试学中</a>
+          <a class="teachAddImage"  bindtap="showClass" data-id="{{item.id}}" 
+               wx:if="{{item.bookStatus == 2}}" >学习中</a>
         </view>
+        <!-- 分割线 -->
+        <view class="line"></view>
       </block>
       <view hidden="{{flagLoad}}" class="loadView">
         正在加载中...
@@ -41,14 +42,18 @@
     </view>
   </scroll-view>
 </view>
+
 <!--教师详情展示-->
 <view class="teachShowDetailsView" hidden="{{details}}" style="height:{{teachBodyHeight}}rpx;">
-    <scroll-view scroll-y="true" class="teachShowDetailsContent" style="height:{{teachBodyHeight-200}}rpx;width:{{detailsWidth}}px;">
-      <view style="text-align:right;"><image src="../../image/close.png" style="width:20px;height:20px;" bindtap='closeTeachDeatils'/></view>
-      <image src="{{teacherDetailsImg}}"  style="width:40px;height:40px;"/>
-      <text class="teachContent1">{{teacherDetailsText}}</text>
-    </scroll-view >
+    <image src="{{teacherDetailsImg}}"  style="width:40px;height:40px;"/>
+    <text>姓名:{{name}}</text>
+    <text>性别:{{sex}}</text>
+    <text>语种:{{language}}</text>
+    <text>教龄:{{teachTime}}</text>
+    <text>个人说明:{{explain}}</text>
+    <text>注册时间:{{registTime}}</text>
 </view>
+
 <!--课程选择-->
 <view class="teachShowDetailsView" hidden="{{classFlag}}" style="height:{{teachBodyHeight}}rpx;">
     <view class="teachShowDetailsContent" style="height:{{teachBodyHeight-200}}rpx;width:{{detailsWidth}}px;">

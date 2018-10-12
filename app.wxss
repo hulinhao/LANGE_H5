@@ -32,10 +32,18 @@
 
 /*分割线样式*/
 .divLine{
-  background: #f3f3f3;
+  background: #91A2AC;
   width: 100%;
   height: 15rpx;
 }
+/*短线分割*/
+.line{
+  background: rgb(228, 225, 225) ;
+  width: 90%;
+  margin-left: 5%;
+  height:3rpx;
+}
+
 /**加载中**/
 .loadView{
   font-size: 14px;

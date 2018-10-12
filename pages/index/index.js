@@ -1,6 +1,5 @@
-// pages/main/index.js
+// pages/main/index.jsteacher/getAllTeacherteacher/getAllTeacher
 Page({
-
   /**
    * 页面的初始数据
    */

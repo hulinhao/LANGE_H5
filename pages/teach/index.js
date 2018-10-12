@@ -14,7 +14,7 @@ Page({
     teachContentWidth:100,
     teachBodyHeight: 500, //tbody滚动高度
 
-    imgList: [],
+    imgList: ['../../image/tb1.jpg', '../../image/tb2.jpg', '../../image/tb3.jpg', '../../image/tb4.jpg'],
     indicatorDots: true,  //小点
 
     autoplay: true,  //是否自动轮播
@@ -54,9 +54,11 @@ Page({
         method: 'post',
         success: function (res) {
           console.log(res)
-          var list = res.data;
           that.setData({
-            list: that.data.list.concat(list)
+            list: res.data.result.result,
+            pageSize: res.data.result.pageSize,
+            pageNo: res.data.result.pageNo,
+            pageCount: res.data.result.pageCount
           })
         }
     }); 
@@ -81,18 +83,35 @@ Page({
   },
   /**点击查看详情 */
   showDetails:function(e){
-    var that = this,content="";
-    for(var u of this.data.list){
-      if(u.id==e.target.dataset.id){
-        content=u.content;
-        break;
-      }
-    }
-    that.setData({
-      details:false,
-      teacherDetailsImg:"../../image/teacher.jpg",
-      teacherDetailsText: content
-    })
+      wx.request({
+        url: 'https://173ca97752.51mypc.cn:443/teacher/getTeacherInfo', 
+        method: 'post',
+        data: {
+          id: '1'
+        },
+        success: function (res) {
+          console.log(res)
+          var v = res.data.result;
+          if(res.data.code != '200'){
+            wx.showToast({
+              title: 'error',
+              icon: 'loading',
+              duration: 1000
+            })
+            return;
+          }
+          this.setData({            
+            name: v.name,
+            sex:v.sex,
+            teachTime: v.teachTime,
+            language: v.language,
+            explain: v.explain,
+            registTime: v.registTime,
+            details: false,
+            teacherDetailsImg: "../../image/teacher.jpg",
+          })
+        }
+      })
   },
   closeTeachDeatils:function(){
     this.setData({
