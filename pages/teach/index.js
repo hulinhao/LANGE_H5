@@ -22,6 +22,19 @@ Page({
     interval: 3000,  //间隔时间
 
     duration: 3000,  //滑动时间
+//教师详情
+    name: '',
+    sex: '',
+    teachTime: '',
+    language: '',
+    explain: '',
+    registTime: '',
+//课程详情
+    courseName:"",
+    course:"",
+    price:"",
+    total:"",
+    time:"",
   },
 
 
@@ -36,7 +49,7 @@ Page({
         that.setData({
           teachBodyHeight: height,
           teachContentWidth: res.windowWidth - 100,
-          detailsWidth: res.windowWidth-56,
+          detailsWidth: res.windowWidth-56-80,
         })
       }
     });
@@ -83,14 +96,19 @@ Page({
   },
   /**点击查看详情 */
   showDetails:function(e){
+      var that =this;
+      var id = e.target.dataset.id;
       wx.request({
         url: 'https://173ca97752.51mypc.cn:443/teacher/getTeacherInfo', 
+        header:{
+          'content-type' : "application/x-www-form-urlencoded"
+        },
         method: 'post',
         data: {
-          "id": '1'
+          id: id
         },
         success: function (res) {
-          console.log(res)
+          
           var v = res.data.result;
           if(res.data.code != '200'){
             wx.showToast({
@@ -100,7 +118,7 @@ Page({
             })
             return;
           }
-          this.setData({            
+          that.setData({            
             name: v.name,
             sex:v.sex,
             teachTime: v.teachTime,
@@ -114,23 +132,62 @@ Page({
       })
   },
   closeTeachDeatils:function(){
-    this.setData({
-      details: true,
-      teacherDetailsImg: "",
-      teacherDetailsText: ""
-    })
+    this.detailsParamRest();
   },
   /**课程选择 */
   showClass:function(e){
-    var that =this;
-    that.setData({
-      classFlag:false
+    var that = this;
+    var id = e.target.dataset.id;
+    wx.request({
+      url: 'https://173ca97752.51mypc.cn:443/teacher/getCourseInfo',
+      header: {
+        'content-type': "application/x-www-form-urlencoded"
+      },
+      method: 'post',
+      data: {
+        id: id
+      },
+      success: function (res) {
+        console.info(res)
+        var v = res.data.result;
+        if (res.data.code != '200') {
+          wx.showToast({
+            title: 'error',
+            icon: 'loading',
+            duration: 1000
+          })
+          return;
+        }
+        console.info(v);return;
+        that.setData({
+          name: v.name,
+          sex: v.sex,
+          teachTime: v.teachTime,
+          language: v.language,
+          explain: v.explain,
+          registTime: v.registTime,
+          classFlag : false,
+          teacherDetailsImg: "../../image/teacher.jpg",
+        })
+      }
     })
   },
   closeClass:function(){
     var that = this;
     that.setData({
       classFlag: true
+    })
+  },
+  detailsParamRest:function(){
+    this.setData({
+      name: '',
+      sex: '',
+      teachTime: '',
+      language: '',
+      explain: '',
+      registTime: '',
+      details: true,
+      teacherDetailsImg: '',
     })
   },
   /**

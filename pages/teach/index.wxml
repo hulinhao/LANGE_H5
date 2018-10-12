@@ -45,13 +45,18 @@
 
 <!--教师详情展示-->
 <view class="teachShowDetailsView" hidden="{{details}}" style="height:{{teachBodyHeight}}rpx;">
-    <image src="{{teacherDetailsImg}}"  style="width:40px;height:40px;"/>
-    <text>姓名:{{name}}</text>
-    <text>性别:{{sex}}</text>
-    <text>语种:{{language}}</text>
-    <text>教龄:{{teachTime}}</text>
-    <text>个人说明:{{explain}}</text>
-    <text>注册时间:{{registTime}}</text>
+    <scroll-view scroll-y="true" class="teachShowDetailsContent" style="height:{{teachBodyHeight-200}}rpx;width:{{detailsWidth}}px;">
+      <view style="text-align:right;"><image src="../../image/close.png" style="width:20px;height:20px;"         bindtap='closeTeachDeatils'/></view>
+      <image src="{{teacherDetailsImg}}"  style="width:40px;height:40px;"/>
+      <view class="teachContent1">
+          <view>姓名：{{name}}</view>
+          <view>性别：{{sex}}</view>
+          <view>语种：{{language}}</view>
+          <view>教龄：{{teachTime}}</view>
+          <view>个人说明：{{explain}}</view>
+          <view>注册时间：{{registTime}}</view>
+      </view>
+    </scroll-view >    
 </view>
 
 <!--课程选择-->
@@ -62,27 +67,27 @@
         <!--名称-->
         <view>
           <text>名称：</text>
-          <text>二胡入门</text>
+          <text>{{courseName}}</text>
         </view>
         <!--价格-->
         <view>
           <text>价格：</text>
-          <text>120￥</text>
+          <text>{{price}}￥</text>
         </view>
         <!--课程-->
         <view>
           <text>课程：</text>
-          <text>24</text>
+          <text>{{course}}</text>
         </view>
         <!--时间-->
         <view>
           <text>时间：</text>
-          <text>40分</text>
+          <text>{{time}}分</text>
         </view>
         <!--合计-->
         <view>
           <text>合计：</text>
-          <text>1021.00￥</text>
+          <text>{{total}}￥</text>
         </view>      
       </view>
       <view>

@@ -33,7 +33,8 @@
 .teachContent1{
   font-size:14px;
   color:#6d6666;
-  padding:3px 8px;
+  padding:3px 0px;
+  padding-left: 15px; 
   text-indent:1.5em;
 }
 /**教师详情展示**/
