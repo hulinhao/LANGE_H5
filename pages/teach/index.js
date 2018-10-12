@@ -87,7 +87,7 @@ Page({
         url: 'https://173ca97752.51mypc.cn:443/teacher/getTeacherInfo', 
         method: 'post',
         data: {
-          id: '1'
+          "id": '1'
         },
         success: function (res) {
           console.log(res)
