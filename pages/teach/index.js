@@ -1,4 +1,5 @@
 // pages/teach/index.js
+const app = getApp()
 Page({
 
   /**
@@ -60,19 +61,25 @@ Page({
    */
   requestData: function (e) {
     var that = this;
+    console.info(app.globalData.url)
       wx.request({
-        url: 'https://173ca97752.51mypc.cn:443/teacher/getAllTeacher',
+        url: app.globalData.url +'/teacher/getAllTeacher',
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
         data: {
         },
         method: 'post',
         success: function (res) {
           console.log(res)
-          that.setData({
-            list: res.data.result.result,
-            pageSize: res.data.result.pageSize,
-            pageNo: res.data.result.pageNo,
-            pageCount: res.data.result.pageCount
-          })
+          if(res.data.code=='200' && res.data.result!=null){
+            that.setData({
+              list: res.data.result.result,
+              pageSize: res.data.result.pageSize,
+              pageNo: res.data.result.pageNo,
+              pageCount: res.data.result.pageCount
+            })
+          }
         }
     }); 
   },
@@ -99,7 +106,7 @@ Page({
       var that =this;
       var id = e.target.dataset.id;
       wx.request({
-        url: 'https://173ca97752.51mypc.cn:443/teacher/getTeacherInfo', 
+        url: app.globalData.url+'/teacher/getTeacherInfo', 
         header:{
           'content-type' : "application/x-www-form-urlencoded"
         },
@@ -139,7 +146,7 @@ Page({
     var that = this;
     var id = e.target.dataset.id;
     wx.request({
-      url: 'https://173ca97752.51mypc.cn:443/teacher/getCourseInfo',
+      url: app.globalData.url +'/teacher/getCourseInfo',
       header: {
         'content-type': "application/x-www-form-urlencoded"
       },
@@ -158,16 +165,14 @@ Page({
           })
           return;
         }
-        console.info(v);return;
+        if(v==null || v=='')return;
         that.setData({
-          name: v.name,
-          sex: v.sex,
-          teachTime: v.teachTime,
-          language: v.language,
-          explain: v.explain,
-          registTime: v.registTime,
-          classFlag : false,
-          teacherDetailsImg: "../../image/teacher.jpg",
+          courseName: v.courseName,
+          course: v.language,
+          price: v.price,
+          total: v.studyNum,
+          time: v.courseHour,
+          classFlag: false,
         })
       }
     })
@@ -175,7 +180,12 @@ Page({
   closeClass:function(){
     var that = this;
     that.setData({
-      classFlag: true
+      classFlag: true,
+      courseName: "",
+      course: "",
+      price: "",
+      total: "",
+      time: "",
     })
   },
   detailsParamRest:function(){

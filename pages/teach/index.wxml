@@ -81,7 +81,7 @@
         </view>
         <!--时间-->
         <view>
-          <text>时间：</text>
+          <text>课时：</text>
           <text>{{time}}分</text>
         </view>
         <!--合计-->

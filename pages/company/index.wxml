@@ -1,0 +1,6 @@
+<!--wxml-->
+<view>
+  <view>平台信息</view>
+  <view>服务人群</view>
+  <view>我们的宗旨</view>
+</view>

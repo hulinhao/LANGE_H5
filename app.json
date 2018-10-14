@@ -2,9 +2,11 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/main/index",
     "pages/teach/index",
-    "pages/userCenter/index"
+    "pages/user/index",
+    "pages/company/index",
+    "pages/course/index",
+    "pages/userInfo/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -25,7 +27,7 @@
       "iconPath": "image/tab_2.png",
       "selectedIconPath": "image/tab_2_s.png"
     },{
-      "pagePath": "pages/main/index",
+      "pagePath": "pages/user/index",
       "text": "个人中心",
       "iconPath": "image/tab_3.png",
       "selectedIconPath": "image/tab_3_s.png"
