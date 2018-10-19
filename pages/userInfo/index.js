@@ -5,9 +5,47 @@ const app = getApp()
 //js
 Page({
   data: {
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    userInfo: null,
-    userInfoPageHeight: 0,
+    id : '',
+    wexinOpenid: '',
+    name: '',
+    phone: '',
+    adress: '',
+    sex: '',
+    personalProfile: '',
+    role: '',
+    signature: '',
+    photo: '',
+    level: ''
+  },
+  requestData: function (userId) {
+    var that = this;
+    wx.request({
+      url: app.globalData.url + '/user/getUserInfo',
+      header: {
+        'content-type': "application/x-www-form-urlencoded"
+      },
+      data: {
+        userId: userId
+      },
+      method: 'post',
+      success: function (res) {
+        if (res.data.code == '200' && res.data.result != null) {
+          that.setData({
+            id: res.data.result.id,
+            wexinOpenid: res.data.result.wexinOpenid,
+            name: res.data.result.name,
+            phone: res.data.result.phone,
+            adress: res.data.result.adress,
+            sex: res.data.result.sex,
+            personalProfile: res.data.result.personalProfile,
+            role: res.data.result.role,
+            signature: res.data.result.signature,
+            photo: res.data.result.photo,
+            level: res.data.result.level
+          })
+        }
+      }
+    });
   },
   onLoad: function () {
     var that =this;
@@ -24,7 +62,8 @@ Page({
       success: function (res) {
         that.userLogin(res);
       }
-    })
+    });
+    that.requestData("1")
   },
   bindGetUserInfo: function (event) {
     var that =this;

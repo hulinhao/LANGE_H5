@@ -5,9 +5,27 @@ const app = getApp()
 //js
 Page({
   data: {
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    userInfo: null,
-    userInfoPageHeight: 0,
+    courseList : []
+  },
+  requestData: function (userId) {
+    var that = this;
+    wx.request({
+      url: app.globalData.url + '/user/getHasBookCourse',
+      header: {
+        'content-type': "application/x-www-form-urlencoded"
+      },
+      data: {
+        userId: userId
+      },
+      method: 'post',
+      success: function (res) {
+        if (res.data.code == '200' && res.data.result != null) {
+          that.setData({
+            courseList : res.data.result
+          })
+        }
+      }
+    });
   },
   onLoad: function () {
     var that =this;
@@ -24,7 +42,8 @@ Page({
       success: function (res) {
         that.userLogin(res);
       }
-    })
+    });
+    that.requestData("1")
   },
   bindGetUserInfo: function (event) {
     var that =this;

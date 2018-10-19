@@ -11,6 +11,10 @@ Page({
     flagLoad:true,
     teacherDetailsImg:"",
     list:[],
+    pageNo:0,
+    pageCount:1,
+    loadContent:'',
+
     detailsWidth:200,
     teachContentWidth:100,
     teachBodyHeight: 500, //tbody滚动高度
@@ -61,20 +65,25 @@ Page({
    */
   requestData: function (e) {
     var that = this;
-    console.info(app.globalData.url)
+    if ((that.data.pageNo + 1) > that.data.pageCount){
+      that.setData({loadContent : "已经到底了！"})
+      return;
+    }else{
+      that.setData({ loadContent: "正在加载中..." })
+    }
       wx.request({
         url: app.globalData.url +'/teacher/getAllTeacher',
         header: {
           'content-type': "application/x-www-form-urlencoded"
         },
         data: {
+          pageNo:that.data.pageNo+1
         },
         method: 'post',
         success: function (res) {
-          console.log(res)
           if(res.data.code=='200' && res.data.result!=null){
             that.setData({
-              list: res.data.result.result,
+              list: that.data.list.concat(res.data.result.result),
               pageSize: res.data.result.pageSize,
               pageNo: res.data.result.pageNo,
               pageCount: res.data.result.pageCount

@@ -1,7 +1,7 @@
 /**index.wxss**/
 .userinfo {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -47,6 +47,26 @@
     margin-left: 10px;
     margin-right: 10px;
 }
-/**.list-group-item:last-child {
-  border-bottom: 0px solid #ddd;
-}**/
+.row{
+  padding: 8px 0px;
+  width: 96%;
+  margin: 2% auto;
+}
+.key{
+  width: 400px;
+  color:#241D15;
+  font-size: 14px;
+}
+.value{
+  width: 400px;
+  color:#ccc;
+  font-size: 12px;
+  margin-right: 20px;
+  clear: both;
+}
+.icon{
+  height:13px;
+  width:13px;
+  float:right;
+  font-weight: 
+}

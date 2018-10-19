@@ -1,4 +1,5 @@
 // pages/main/index.jsteacher/getAllTeacherteacher/getAllTeacher
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
@@ -38,7 +39,7 @@ Page({
       }
     });
     wx.request({
-      url: 'https://173ca97752.51mypc.cn:443/index/getCompanyInfo',
+      url: app.globalData.url + '/index/getCompanyInfo',
       data: {
       },
       method: 'post',
