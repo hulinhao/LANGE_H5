@@ -1,30 +1,13 @@
 <!--index.wxml-->
 <view>
   <view class="mainHeadView"> 
-       <swiper indicator-dots="{{indicatorDots}}" style='height:75px;'  
 
-           autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="true">  
-
-         <block wx:for="{{imgList}}">  
-
-           <swiper-item>  
-               <image src="{{item}}" class="slide-image" width="100%" style='height:75px;'/>  
-           </swiper-item>  
-
-         </block>  
-
-        </swiper>  
+        <view>{{list[0].playerOne}}</view>
+        <view>{{list[0].playerTwo}}</view>
 
   </view>
-  <!-- 分割线 -->
-  <view class="divLine"></view>
-  
-  <view class="mainBodyView">
-    <view class="mainBodyTitleView" style="background-image: url('../../image/bg.jpg'); background-size: 100% 100%;">
-        <text class="mainTitleText">{{title}}</text>
-    </view>
-    <scroll-view scroll-y="true" bindscrolltolower="bindscrolltolower" style="height:{{tbodyHeight}}rpx">
-    <text class="mianContentText">{{content}}</text>
-    </scroll-view>
-  </view>
+
 </view>
+
+
+

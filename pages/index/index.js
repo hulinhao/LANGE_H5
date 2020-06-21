@@ -39,18 +39,19 @@ Page({
       }
     });
     wx.request({
-      url: app.globalData.url + '/index/getCompanyInfo',
+      url: app.globalData.url + '/game/getGameList',
       data: {
       },
       method: 'post',
       success: function (res) {
-        console.log(res)
-        var list = res.data;
-        that.setData({
-          content: res.data.result.companyProfile,
-          title: res.data.result.companyName,
-          imgList: res.data.result.bannerUrl
-        })
+        var info = res.data;
+        if (info.code === '200') {
+          that.setData({
+            list: info.data
+          })
+        } else {
+          console.log('接口访问失败！！！');
+        }
       }
     });
     
