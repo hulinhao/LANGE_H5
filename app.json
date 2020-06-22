@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/game/index",
     "pages/logs/logs",
     "pages/teach/index",
     "pages/user/index",
@@ -18,22 +18,22 @@
     "selectedColor": "#f00",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/game/index",
         "text": "赛程",
-        "iconPath": "image/tab_1.png",
-        "selectedIconPath": "image/tab_1_s.png"
+        "iconPath": "image/icon/tab_1.png",
+        "selectedIconPath": "image/icon/tab_1_s.png"
       },
       {
         "pagePath": "pages/teach/index",
-        "text": "信息",
-        "iconPath": "image/tab_2.png",
-        "selectedIconPath": "image/tab_2_s.png"
+        "text": "赛事管理",
+        "iconPath": "image/icon/tab_2.png",
+        "selectedIconPath": "image/icon/tab_2_s.png"
       },
       {
         "pagePath": "pages/user/index",
-        "text": "下注",
-        "iconPath": "image/tab_3.png",
-        "selectedIconPath": "image/tab_3_s.png"
+        "text": "我的投注",
+        "iconPath": "image/icon/tab_3.png",
+        "selectedIconPath": "image/icon/tab_3_s.png"
       }
     ]
   },

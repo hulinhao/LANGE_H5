@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view>
+  <view class="mainHeadView"> 
+     <view class="wallet">
+        <image src="/image/icon/glod.png" class="glod"></image>
+        <text class="glodText">500</text>
+     </view>
+  </view>
+  <view>
+     <view wx:for="{{list}}"  wx:key="key" class="listCard">
+        <image wx:if='{{item.proId == 1}}' src='/image/icon/taiqiu.png'></image>  <image wx:if='{{item.proId == 2}}' src='/image/icon/lanqiu.png'></image>
+        <text>{{item.playerOne}}</text><image src="/image/icon/vs.png"></image><text>{{item.playerTwo}}</text> <text>{{item.odds}}</text>
+        <button>下注</button>
+     </view>
+  </view>
+
+</view>
+
+
+

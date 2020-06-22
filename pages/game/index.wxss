@@ -1,0 +1,22 @@
+/* pages/main/index.wxss */
+.wallet{
+  width: 150px;
+  height: 100%;
+}
+.glod{
+  width: 30px;
+  height: 30px;
+  transform:translateY(30%); 
+  margin-left: 20px;
+}
+.glodText{
+  border-radius: 20%;
+  background-color: #296E8D;
+  margin-left: 10px;
+}
+
+.listCard image{
+  width: 30px;
+  height: 30px;
+}
+

@@ -35,7 +35,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    url:'https://173ca97752.51mypc.cn:443',
+    url:'http://127.0.0.1:8888',
     //url:"192.168.14.69:888",
     session_id: "",
   }

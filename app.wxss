@@ -22,9 +22,9 @@
 }
 
 .mainHeadView{
-  height: 150rpx;
+  height: 100rpx;
   width: 100%;
- /* background: #cc9393;*/
+ background: #ccc;
   align-items:center;
   justify-content:center;
   /*display:flex;*/
