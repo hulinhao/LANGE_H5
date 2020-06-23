@@ -35,7 +35,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    url:'http://127.0.0.1:8888',
+    url:'http://localhost:8888',
     //url:"192.168.14.69:888",
     session_id: "",
   }

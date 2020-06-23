@@ -5,19 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tbodyHeight: 500, //tbody滚动高度
-    content:"",
-    title:"",
-    imgList:[],
-    indicatorDots: true,  //小点
-
-    autoplay: true,  //是否自动轮播
-
-    interval: 3000,  //间隔时间
-
-    duration: 3000,  //滑动时间
+    betParam:[]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -62,7 +51,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
@@ -105,5 +94,85 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+// 查看盘口 弹出模态框
+  showPlate : function(e){
+    var that = this;
+    var gameId = e.currentTarget.id;
+    wx.request({
+      url: app.globalData.url + '/plate/getPlat',
+      data: {
+        gameId : gameId
+      },
+      method: 'post',
+      success: function (res) {
+        var info = res.data;
+        if (info.code === '200') {
+          that.setData({
+            plateList: info.data.plate,
+            game:info.data.game,
+            betParam:[], // 打开盘口之前将下注参数清空
+            showModal:true
+          })
+        } else {
+          console.log('接口访问失败！！！');
+        }
+      }
+    });
+  },
+//关闭模态框
+closeDialog:function(){
+    this.setData({
+      showModal:false
+    })
+  },
+  //提交下注
+  submitOrder: function(){
+    var params = this.data.betParam;
+    if(params.length<1){
+      wx.showToast({
+        title: '请输入下注金额',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
+    console.log(params);
+  },
+  //下注金额失去焦点
+  amountBlu: function(e){
+    var amount = e.detail.value;
+    var plateId = e.currentTarget.id;
+    var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
+    if(!reg.test(amount)){
+        wx.showToast({
+          title: '请输入正确的数字',
+          icon: 'none',
+          duration: 1500
+        })
+        return;
+    }
+    var param = {
+      'userId':1,
+      'plateId':plateId,
+      'amount':amount
+    }
+    // 判断下注参数里面有没有当前盘口下注信息
+    for (let i = 0; i < this.data.betParam.length; i++) {
+      const element = this.data.betParam[i];
+      if(element.plateId === plateId){
+        if(amount >0){
+          this.data.betParam[i] = param;
+        }else{
+          this.data.betParam.splice(i,1);
+        }
+        console.log(this.data.betParam);
+        return;
+      }
+    }
+    if(amount>0){
+      this.data.betParam.push(param);
+      console.log(this.data.betParam);
+    }
   }
 })

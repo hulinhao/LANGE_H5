@@ -15,8 +15,68 @@
   margin-left: 10px;
 }
 
-.listCard image{
+image{
   width: 30px;
   height: 30px;
+}
+
+.modal-dialog {
+  overflow: hidden;
+  position: fixed;
+  top: 15%;
+  background-color: #ccc;
+  border-radius: 10rpx;
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  z-index: 999;
+  margin-left: 10%;
+  height: auto;
+  min-height: 65%;
+  width: 80%;
+}
+
+.betAmount{
+  background-color:#296E8D;
+  width: 100px;
+  display: inline-block;
+}
+
+.table {
+  border: 0px solid darkgray;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+.td {
+    width:40%;
+    justify-content: center;
+    text-align: center;
+}
+.bg-w{
+  background: snow;
+}
+.bg-g{
+  background: #E6F3F9;
+}
+.bg-h{
+  background: #F5F5F5;
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #3366FF;
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
+.submitBtn{
+  width: 100%;
+  margin-bottom: 0px;
 }
 
