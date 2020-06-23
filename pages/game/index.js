@@ -5,12 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    betParam:[]
+    betParam:[],
+    showModal:false,
+    gold: 100
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("监听页面加载");
     var that = this; 
     wx.getStorage({ 
       key: 'dataDate', 
@@ -43,57 +46,59 @@ Page({
         }
       }
     });
-    
 
+    //设置金币
+    console.log(app.globalData.userInfo);
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    console.log("初次渲染完成");
+    console.log(app.globalData);
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    console.log("监听页面显示");
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    console.log("监听页面隐藏");
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    console.log("监听页面卸载");
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    console.log("监听用户下拉动作");
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    console.log("页面上拉触底事件的处理函数");
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    console.log("用户点击右上角分享");
   },
 // 查看盘口 弹出模态框
   showPlate : function(e){
@@ -128,7 +133,8 @@ closeDialog:function(){
   },
   //提交下注
   submitOrder: function(){
-    var params = this.data.betParam;
+    var that = this;
+    var params = that.data.betParam;
     if(params.length<1){
       wx.showToast({
         title: '请输入下注金额',
@@ -138,6 +144,24 @@ closeDialog:function(){
       return;
     }
     console.log(params);
+    wx.request({
+      url: app.globalData.url + '/order/addOrder',
+      data: {
+        betParam : that.data.betParam
+      },
+      method: 'post',
+      success: function (res) {
+        var info = res.data;
+        console.log(info.code);
+        if (info.code == 200) {
+          that.setData({
+            showModal:false
+          })
+        } else {
+          console.log('接口访问失败！！！');
+        }
+      }
+    });
   },
   //下注金额失去焦点
   amountBlu: function(e){

@@ -3,7 +3,7 @@
   <view class="mainHeadView"> 
      <view class="wallet">
         <image src="/image/icon/glod.png" class="glod"></image>
-        <text class="glodText">500</text>
+        <text class="glodText">{{gold}}</text>
      </view>
   </view>
   <view>
