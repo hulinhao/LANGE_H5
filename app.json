@@ -2,8 +2,8 @@
   "pages": [
     "pages/game/index",
     "pages/logs/logs",
-    "pages/teach/index",
-    "pages/user/index",
+    "pages/project/index",
+    "pages/manage/index",
     "pages/company/index",
     "pages/course/index",
     "pages/userInfo/index"
@@ -24,14 +24,14 @@
         "selectedIconPath": "image/icon/tab_1_s.png"
       },
       {
-        "pagePath": "pages/teach/index",
-        "text": "赛事管理",
+        "pagePath": "pages/project/index",
+        "text": "赛事",
         "iconPath": "image/icon/tab_2.png",
         "selectedIconPath": "image/icon/tab_2_s.png"
       },
       {
-        "pagePath": "pages/user/index",
-        "text": "我的投注",
+        "pagePath": "pages/manage/index",
+        "text": "赛事管理",
         "iconPath": "image/icon/tab_3.png",
         "selectedIconPath": "image/icon/tab_3_s.png"
       }

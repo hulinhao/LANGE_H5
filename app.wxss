@@ -21,21 +21,6 @@
     color:red;
 }
 
-.mainHeadView{
-  height: 100rpx;
-  width: 100%;
- background: #ccc;
-  align-items:center;
-  justify-content:center;
-  /*display:flex;*/
-}
-
-/*分割线样式*/
-.divLine{
-  background: #91A2AC;
-  width: 100%;
-  height: 15rpx;
-}
 /*短线分割*/
 .line{
   background: rgb(228, 225, 225) ;
@@ -50,4 +35,37 @@
   color: #cc9393;
   text-align: center;
   max-height: 35px;
+}
+
+
+.mainHeadView{
+  height: 100rpx;
+  width: 100%;
+ background: #ccc;
+  align-items:center;
+  justify-content:center;
+  /*display:flex;*/
+}
+
+.wallet{
+  width: 150px;
+  height: 100%;
+  float: right;
+}
+
+.userInfo{
+  height: 100%;
+  width: 50px;
+  float: left;
+}
+
+.glod{
+  width: 30px;
+  height: 30px;
+  transform:translateY(30%); 
+  margin-left: 20px;
+}
+.glodText{
+  border-radius: 20%;
+  margin-left: 10px;
 }

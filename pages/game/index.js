@@ -6,8 +6,7 @@ Page({
    */
   data: {
     betParam:[],
-    showModal:false,
-    gold: 100
+    showModal:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -46,9 +45,7 @@ Page({
         }
       }
     });
-
-    //设置金币
-    console.log(app.globalData.userInfo);
+    app.getHead(that);
   },
 
   /**
@@ -56,7 +53,6 @@ Page({
    */
   onReady: function () {
     console.log("初次渲染完成");
-    console.log(app.globalData);
   },
 
   /**

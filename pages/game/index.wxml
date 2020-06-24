@@ -1,11 +1,7 @@
 <!--index.wxml-->
 <view>
-  <view class="mainHeadView"> 
-     <view class="wallet">
-        <image src="/image/icon/glod.png" class="glod"></image>
-        <text class="glodText">{{gold}}</text>
-     </view>
-  </view>
+   <import src ="../head/index.wxml"/>
+   <template is="head" data="{{url:url,gold:gold}}"/>
   <view>
      <view wx:for="{{list}}"  wx:key="key" class="listCard">
         <button type="primary" plain="true" bindtap="showPlate" id="{{item.id}}">         
@@ -33,8 +29,11 @@
             </view>
          </block>
       </view>
-      <button type="primary" class="submitBtn" bindtap="submitOrder">下注</button>
-      <button type="warn" class="submitBtn" bindtap="closeDialog">取消</button>
+      <view>
+            <button type="warn" class="submitBtn" bindtap="closeDialog">取消</button>
+            <button type="primary" class="submitBtn" bindtap="submitOrder">下注</button>            
+      </view>
+
   </view>
 </view>
 

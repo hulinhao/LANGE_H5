@@ -1,18 +1,4 @@
 /* pages/main/index.wxss */
-.wallet{
-  width: 150px;
-  height: 100%;
-}
-.glod{
-  width: 30px;
-  height: 30px;
-  transform:translateY(30%); 
-  margin-left: 20px;
-}
-.glodText{
-  border-radius: 20%;
-  margin-left: 10px;
-}
 
 image{
   width: 30px;
@@ -75,7 +61,8 @@ image{
   align-items: center;
 }
 .submitBtn{
-  width: 100%;
+  display: inline-block;
+  width: 50%;
   margin-bottom: 0px;
 }
 
