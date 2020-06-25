@@ -13,11 +13,11 @@ Page({
    */
   onLoad: function (options) {
     console.log("监听页面加载");
+    console.log(app.globalData.userInfo);
     var that = this; 
     wx.getStorage({ 
       key: 'dataDate', 
       success: function (res) { 
-        console.log(res.data); 
         that.createTable(res.data); 
       } 
     });
@@ -45,7 +45,10 @@ Page({
         }
       }
     });
+    //加载head参数
     app.getHead(that);
+
+    console.log(app.globalData);
   },
 
   /**
@@ -109,12 +112,20 @@ Page({
       success: function (res) {
         var info = res.data;
         if (info.code === '200') {
-          that.setData({
-            plateList: info.data.plate,
-            game:info.data.game,
-            betParam:[], // 打开盘口之前将下注参数清空
-            showModal:true
-          })
+          if(info.data.plate.length > 0){
+            that.setData({
+              plateList: info.data.plate,
+              game:info.data.game,
+              betParam:[], // 打开盘口之前将下注参数清空
+              showModal:true
+            })
+          }else{
+            wx.showToast({
+              title: '暂未开始竞猜',
+              icon: 'none',
+              duration: 1500
+            })
+          }
         } else {
           console.log('接口访问失败！！！');
         }
@@ -148,7 +159,6 @@ closeDialog:function(){
       method: 'post',
       success: function (res) {
         var info = res.data;
-        console.log(info.code);
         if (info.code == 200) {
           that.setData({
             showModal:false
@@ -164,7 +174,7 @@ closeDialog:function(){
     var amount = e.detail.value;
     var plateId = e.currentTarget.id;
     var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
-    if(!reg.test(amount)){
+    if(!reg.test(amount)&&amount!=''){
         wx.showToast({
           title: '请输入正确的数字',
           icon: 'none',
@@ -184,6 +194,7 @@ closeDialog:function(){
         if(amount >0){
           this.data.betParam[i] = param;
         }else{
+          console.log('amount:'+amount)
           this.data.betParam.splice(i,1);
         }
         console.log(this.data.betParam);

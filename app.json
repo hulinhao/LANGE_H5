@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/project/index",
     "pages/game/index",
     "pages/logs/logs",
-    "pages/project/index",
+  
     "pages/manage/index",
     "pages/company/index",
     "pages/course/index",

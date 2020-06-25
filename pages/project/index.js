@@ -6,27 +6,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-    proPlate : null
+    proPlate : null,
+    isShow:null,
   },
-
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {         //
-        var height = (res.windowHeight - 87.5) * 2;
-        that.setData({
-          teachBodyHeight: height,
-          teachContentWidth: res.windowWidth - 100,
-          detailsWidth: res.windowWidth-56-80,
-        })
-      }
-    });
-    app.getHead(that); //head数据
-    that.requestData();
+    app.userLogin().then(res => {
+      console.log("promise回调后的数据：");
+      console.log(app.globalData.userInfo);
+      var that = this;
+      wx.getSystemInfo({
+        success: function (res) {         //
+          that.setData({
+            projectBodyHeight: res.windowHeight - (res.windowWidth / 750) * 94,
+            projectContentWidth: res.windowWidth - 100,
+            detailsWidth: res.windowWidth-56-80,
+          })
+        }
+      });
+      //加载head参数
+      app.getHead(that); 
+      that.requestData();
+     })
   },
   /**
    * 请求数据
@@ -38,15 +41,38 @@ Page({
         method: 'post',
         success: function (res) {
           if(res.data.code == 200 ){
+            var proPlate = res.data.data;
             that.setData({
-               proPlate : res.data.data
+              proPlate : proPlate
             })
-            console.log(that.data.proPlate);
+            // 储存盘口显示的标志
+            var show = new Map();
+            proPlate.forEach(element => {
+              show[element.project.id] = 'none';
+            });
+            that.setData({
+              
+              isShow:show
+            })
           }
         }
     }); 
   },
-
+  showPlate:function(e){
+    var that = this;
+    var id = e.currentTarget.id;
+    var show = that.data.isShow;
+    var flag = show[id+''];
+    
+    if(flag == 'none'){
+      show[id+''] = 'display';
+    }else if(flag == 'display'){
+      show[id+''] = 'none';
+    }
+    that.setData({
+      isShow:show
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

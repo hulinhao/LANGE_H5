@@ -1,13 +1,27 @@
 /* pages/main/index.wxss */
-
 image{
-  width: 30px;
-  height: 30px;
+  width: 18px;
+  height: 18px;
 }
-
+.proType{
+  border: 1px red solid;
+  vertical-align: middle;
+}
+.pkImg{
+  border: 1px red solid;
+  vertical-align: middle;
+}
+.playerOne{
+  border: 1px red solid;
+}
+.playerTwo{
+  border: 1px red solid;
+}
 .modal-dialog {
-  overflow: hidden;
+  overflow:auto;
+  overflow-y: scroll; 
   position: fixed;
+  scroll-margin-top: 200px;
   top: 15%;
   background-color: #ccc;
   border-radius: 10rpx;
@@ -60,9 +74,21 @@ image{
   height: 3rem;
   align-items: center;
 }
+.btndiv{
+  position: relative;
+  bottom:0px;
+  width: 100%;
+}
 .submitBtn{
   display: inline-block;
-  width: 50%;
-  margin-bottom: 0px;
+  width: 35%;
+  margin-right: 5%;
+  margin-left: 5%;
+  flex: 1;
+  height: 80rpx;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 10rpx;
 }
 

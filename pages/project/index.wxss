@@ -1,58 +1,43 @@
-/**teach**/
-.teacherText{
-  /**border:1px solid #000;*/
-  margin:5rpx 10rpx;
-  height:160rpx;
-  padding:5rpx 10rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+.proPage{
+  border: 1px solid red;
+  height: 100%;
 }
-.teacherImage{
-  width:60px;
-  height:60px;
-  border-radius: 50px;
+.project{
+  border: 1px solid black;
+  min-height: 100%;
 }
-.teachAddImage{
-  width:20px;
-  height:20px;
-} 
-.teachContent{
-  font-size:14px;
-  height:110rpx;
-  color:#6d6666;
-  padding:3px 8px;
-  text-indent:1.5em;
-  text-overflow: ellipsis;
-  display: -webkit-box; /** 将对象作为伸缩盒子模型显示 **/
-  -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
-  -webkit-line-clamp: 3; /** 显示的行数 **/
-  overflow: hidden;  /** 隐藏超出的内容 **/
+.projectCard{
+  border: 1px solid blue;
+  width: 100%;
 }
-.teachContent1{
-  font-size:14px;
-  color:#6d6666;
-  padding:3px 0px;
-  padding-left: 15px; 
-  text-indent:1.5em;
+.proName{
+  display: inline-block;
+  font-size: 18px;
+  border: 1px solid red;
+  width: 85%;
 }
-/**教师详情展示**/
-.teachShowDetailsView{
-  position:absolute;
-  width:100%;
-  top:85px;
+.proRemark{
+  display: block;
+  font-size: 12px;
+  color: #ccc;
+  border: 1px solid red;
+  width: 100%;
+  right: 0px;
+  font-family: FangSong;
+  text-align: right;
 }
-.teachShowDetailsContent{
-  border:3px solid #f3f3f3;
-  margin:25px 20px;
-  height: 300px;
-  padding:5px 8px;
-  border-radius: 5px;
-  background: #fff;
+.proImg{
+  position: fixed;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  right: 8px;
+  border: 1px solid red;
 }
-.classDetails view text{
-  font-size:15px;
-  padding:5px 10px;
-  color:#6d6666;
+.proPlate{
+  
+}
+.proPlate view{
+  display: inline-block;
+  background-color:#2E2E2E;
 }

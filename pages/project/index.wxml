@@ -1,15 +1,18 @@
-<view>
-   <import src ="../head/index.wxml"/>
-   <template is="head" data="{{url:url,gold:gold}}"/>
-</view>
-<view>
-   <view wx:for="{{proPlate}}" wx:key="key">
-        <view>{{item.project.name}}</view>
-        <view>{{item.project.remark}}</view>
-        <view>{{item.project.type}}</view>
-        <view wx:for="{{item.plates}}" wx:for-item="plate" wx:key="pk" style="background-color:#ccc">
-            <view>{{plate.content}}</view>
-            <view>{{plate.odds}}</view>
-        </view>
+<view style="height:{{projectBodyHeight}}rpx" class="proPage">
+   <view>
+      <import src ="../head/index.wxml"/>
+      <template is="head" data="{{url:url,gold:gold}}"/>
+   </view>
+   <view class="project">
+      <view wx:for="{{proPlate}}" wx:key="index" class="projectCard">
+         <view class="proName" catchtap="showPlate" id='{{item.project.id}}'>
+         {{item.project.name}}</view>
+         <image src="/image/icon/{{item.project.img}}" class="proImg"></image>
+         <view class="proRemark">{{item.project.remark}} </view>
+         <view wx:for="{{item.plates}}" wx:for-item="plate" wx:key="pk" class="proPlate" style="display:{{isShow[item.project.id]}}">
+               <view>{{plate.content}}</view>
+               <view>{{plate.odds}}</view>
+         </view>
+      </view>
    </view>
 </view>

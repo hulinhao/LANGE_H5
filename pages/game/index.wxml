@@ -3,13 +3,17 @@
    <import src ="../head/index.wxml"/>
    <template is="head" data="{{url:url,gold:gold}}"/>
   <view>
-     <view wx:for="{{list}}"  wx:key="key" class="listCard">
-        <button type="primary" plain="true" bindtap="showPlate" id="{{item.id}}">         
-            <image wx:if='{{item.projectId == 1}}' src='/image/icon/taiqiu.png'></image>  <image wx:if='{{item.projectId == 2}}' src='/image/icon/lanqiu.png'></image>
-            <text>{{item.playerOne}}</text><image src="/image/icon/vs.png"></image><text>{{item.playerTwo}}</text> 
+     <view wx:for="{{list}}"  wx:key="key" >
+        <button type="primary" plain="true" bindtap="showPlate" id="{{item.id}}" >         
+            <image wx:if='{{item.projectId == 1}}' src='/image/icon/taiqiu.png' class="proType"></image> 
+            <image wx:if='{{item.projectId == 2}}' src='/image/icon/lanqiu.png' class="proType"></image>
+            <text class="playerOne">{{item.playerOne}}</text>
+            <image src="/image/icon/pk.png" class="pkImg"></image>
+            <text class="playerTwo">{{item.playerTwo}}</text> 
         </button>
      </view>
   </view> 
+
   <view class="modal-dialog" wx:if="{{showModal}}">
       <view>
         <!-- <image wx:if='{{game.projectId == 1}}' src='/image/icon/taiqiu.png'></image>  <image wx:if='{{game.projectId == 2}}' src='/image/icon/lanqiu.png'></image> -->
@@ -20,21 +24,21 @@
             <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
                <view class="td">{{item.content}}</view>
                <view class="td">1:{{item.odds}}</view>
-               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" value = "0" id="{{item.id}}" bindblur="amountBlu" ></input></view>
+               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.id}}" bindblur="amountBlu" ></input></view>
             </view>
             <view class="tr bg-h" wx:else>
                <view class="td">{{item.content}}</view>
                <view class="td">1:{{item.odds}}</view>
-               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" value = "0" id="{{item.id}}" bindblur="amountBlu"></input></view>
+               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.id}}" bindblur="amountBlu"></input></view>
             </view>
          </block>
       </view>
-      <view>
+      <view class="btndiv">
             <button type="warn" class="submitBtn" bindtap="closeDialog">取消</button>
-            <button type="primary" class="submitBtn" bindtap="submitOrder">下注</button>            
+            <button type="primary" class="submitBtn" bindtap="submitOrder">竞猜</button>            
       </view>
-
   </view>
+
 </view>
 
 
