@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/project/index",
+    "pages/manage/index",
     "pages/game/index",
     "pages/logs/logs",
-  
-    "pages/manage/index",
+    "pages/project/index",
+   
     "pages/company/index",
     "pages/course/index",
     "pages/userInfo/index"
@@ -32,7 +32,7 @@
       },
       {
         "pagePath": "pages/manage/index",
-        "text": "赛事管理",
+        "text": "我的",
         "iconPath": "image/icon/tab_3.png",
         "selectedIconPath": "image/icon/tab_3_s.png"
       }

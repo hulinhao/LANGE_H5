@@ -4,32 +4,58 @@
    <template is="head" data="{{url:url,gold:gold}}"/>
   <view>
      <view wx:for="{{list}}"  wx:key="key" >
-        <button type="primary" plain="true" bindtap="showPlate" id="{{item.id}}" >         
-            <image wx:if='{{item.projectId == 1}}' src='/image/icon/taiqiu.png' class="proType"></image> 
-            <image wx:if='{{item.projectId == 2}}' src='/image/icon/lanqiu.png' class="proType"></image>
+        <button type="primary" plain="true" bindtap="showPlate" id="{{item.id}}" class="showPlate"> 
+            <image src='/image/icon/{{item.imgName}}' class="proType"></image> 
             <text class="playerOne">{{item.playerOne}}</text>
             <image src="/image/icon/pk.png" class="pkImg"></image>
-            <text class="playerTwo">{{item.playerTwo}}</text> 
+            <text class="playerTwo">{{item.playerTwo}}</text>
+            <view style="color:#fff">.</view>
         </button>
      </view>
   </view> 
 
   <view class="modal-dialog" wx:if="{{showModal}}">
-      <view>
-        <!-- <image wx:if='{{game.projectId == 1}}' src='/image/icon/taiqiu.png'></image>  <image wx:if='{{game.projectId == 2}}' src='/image/icon/lanqiu.png'></image> -->
-         <text>{{game.playerOne}}  vs  {{game.playerTwo}}</text>
+      <view class="gameHead">
+         <image src='/image/icon/{{game.imgName}}'></image>  
+         <text>{{game.playerOne}} vs {{game.playerTwo}}</text>
       </view>
       <view class="table">
-         <block wx:for="{{plateList}}" wx:key="key">
+         <block wx:for="{{gameFrtPlateVo}}" wx:for-item="item" wx:key="key">
             <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-               <view class="td">{{item.content}}</view>
-               <view class="td">1:{{item.odds}}</view>
-               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.id}}" bindblur="amountBlu" ></input></view>
+               <view class="td">{{item.forecast.content}}</view>
+               <block wx:if="{{item.forecast.type == 2}}">
+               <view class="merge_td">
+                   <view wx:for="{{item.plates}}" wx:for-item="plate" wx:key="key" class="childPlate">
+                      <view >{{plate.content}}</view>
+                      <view>1:{{plate.odds}}</view>
+                      <input class="betAmount_2" type="digit" adjust-position = "true" placeholder="0" id="{{plate.id}}" bindblur="amountBlu"></input>
+                   </view>
+               </view>
+               </block>
+               <block wx:elif="{{item.forecast.type == 1}}">
+               <view class="td">
+                        1:{{item.plates[0].odds}}</view>
+               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.plates[0].id}}" bindblur="amountBlu" ></input>
+               </view>
+               </block>
             </view>
             <view class="tr bg-h" wx:else>
-               <view class="td">{{item.content}}</view>
-               <view class="td">1:{{item.odds}}</view>
-               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.id}}" bindblur="amountBlu"></input></view>
+                <view class="td">{{item.forecast.content}}</view>
+               <block wx:if="{{item.forecast.type == 2}}">
+               <view class="merge_td">
+                   <view wx:for="{{item.plates}}" wx:for-item="plate" wx:key="key" class="childPlate">
+                      <view >{{plate.content}}</view>
+                      <view>1:{{plate.odds}}</view>
+                      <input class="betAmount_2" type="digit" adjust-position = "true" placeholder="0" id="{{plate.id}}" bindblur="amountBlu"></input>
+                   </view>
+               </view>
+               </block>
+               <block wx:elif="{{item.forecast.type == 1}}">
+               <view class="td">
+                        1:{{item.plates[0].odds}}</view>
+               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.plates[0].id}}" bindblur="amountBlu" ></input>
+               </view>
+               </block>
             </view>
          </block>
       </view>

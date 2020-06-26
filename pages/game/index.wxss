@@ -3,27 +3,38 @@ image{
   width: 18px;
   height: 18px;
 }
+.showPlate{
+  margin-top: 16px;  
+  width: 99%;
+}
 .proType{
-  border: 1px red solid;
-  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: 8px;
+  top: 10px;
 }
 .pkImg{
-  border: 1px red solid;
-  vertical-align: middle;
+  position: absolute;
+  left: 47.3%;
+  top: 16px;
 }
 .playerOne{
-  border: 1px red solid;
+  position: absolute;
+  right: 60%;
 }
 .playerTwo{
-  border: 1px red solid;
+  position: absolute;
+  left: 60%;
+  clear: both;
 }
 .modal-dialog {
   overflow:auto;
   overflow-y: scroll; 
   position: fixed;
   scroll-margin-top: 200px;
-  top: 15%;
-  background-color: #ccc;
+  top: 10%;
+  background-color: #99CC99;
   border-radius: 10rpx;
   text-align: center;
   flex-direction: column;
@@ -34,15 +45,47 @@ image{
   min-height: 65%;
   width: 80%;
 }
-
-.betAmount{
-  background-color:#296E8D;
-  width: 100px;
+.gameHead{
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-family: KaiTi;
+}
+.gameHead image{
+  position: absolute;
+  left: 2px;
+  top: 2px;
+}
+.childPlate{
+  height: 50%;
+}
+.childPlate view{
   display: inline-block;
+  font-size:12px;
+  width: 26%;
+}
+.betAmount{
+  background-color:#C6D5DC;
+  width: 80px;
+  display: inline-block;
+  height: 1.2rem;
+  min-height: 1.2rem;
+  border-radius: 12px;
+}
+.betAmount_2{
+  background-color:#C6D5DC;
+  width:80px;
+  display: inline-block;
+  margin-top:-5px;
+  height: 0.8rem;
+  min-height: 0.9rem;
+  border-radius: 12px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .table {
-  border: 0px solid darkgray;
+  border: 3px solid darkgray;
 }
 .tr {
   display: flex;
@@ -55,6 +98,11 @@ image{
     width:40%;
     justify-content: center;
     text-align: center;
+}
+.merge_td{
+  width:80%;
+  text-align: left;
+  height: 80%;
 }
 .bg-w{
   background: snow;

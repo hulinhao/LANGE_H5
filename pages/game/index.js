@@ -6,14 +6,13 @@ Page({
    */
   data: {
     betParam:[],
-    showModal:false
+    showModal:false,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log("监听页面加载");
-    console.log(app.globalData.userInfo);
     var that = this; 
     wx.getStorage({ 
       key: 'dataDate', 
@@ -29,26 +28,6 @@ Page({
       })
       }
     });
-    wx.request({
-      url: app.globalData.url + '/game/getGameList',
-      data: {
-      },
-      method: 'post',
-      success: function (res) {
-        var info = res.data;
-        if (info.code === '200') {
-          that.setData({
-            list: info.data
-          })
-        } else {
-          console.log('接口访问失败！！！');
-        }
-      }
-    });
-    //加载head参数
-    app.getHead(that);
-
-    console.log(app.globalData);
   },
 
   /**
@@ -63,6 +42,21 @@ Page({
    */
   onShow: function () {
     console.log("监听页面显示");
+    //设置head数据
+
+    if(app.globalData.userInfo != '' && app.globalData.userInfo != null){
+      this.setData({
+        url: app.globalData.userInfo.avatarUrl,
+        gold: app.globalData.userInfo.gold
+      })
+    }else{
+
+      this.setData({
+        url: '/image/user.png',
+        gold: '$'
+      })
+    }
+    this.loadData();
   },
 
   /**
@@ -84,6 +78,7 @@ Page({
    */
   onPullDownRefresh: function () {
     console.log("监听用户下拉动作");
+    this.loadData();
   },
 
   /**
@@ -99,12 +94,33 @@ Page({
   onShareAppMessage: function () {
     console.log("用户点击右上角分享");
   },
+  //加载数据
+  loadData:function(){
+    var that = this;
+    console.log("加载数据:game");
+    wx.request({
+      url: app.globalData.url + '/game/getGameList',
+      data: {
+      },
+      method: 'post',
+      success: function (res) {
+        var info = res.data;
+        if (info.code === '200') {
+          that.setData({
+            list: info.data
+          })
+        } else {
+          console.log('接口访问失败！！！');
+        }
+      }
+    });
+  },
 // 查看盘口 弹出模态框
   showPlate : function(e){
     var that = this;
     var gameId = e.currentTarget.id;
     wx.request({
-      url: app.globalData.url + '/plate/getPlat',
+      url: app.globalData.url + '/plate/getGamePlate',
       data: {
         gameId : gameId
       },
@@ -112,10 +128,10 @@ Page({
       success: function (res) {
         var info = res.data;
         if (info.code === '200') {
-          if(info.data.plate.length > 0){
+          if(info.data.frtPlateVos.length > 0){
             that.setData({
-              plateList: info.data.plate,
-              game:info.data.game,
+              game:info.data.gameVo,
+              gameFrtPlateVo: info.data.frtPlateVos,
               betParam:[], // 打开盘口之前将下注参数清空
               showModal:true
             })
@@ -150,17 +166,51 @@ closeDialog:function(){
       })
       return;
     }
-    console.log(params);
+    var userInfo = app.globalData.userInfo;
+    if(userInfo == '' || userInfo == null || userInfo == 'undefined'){
+      wx.showToast({
+        title: '请先授权登录',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
+    var gold = app.globalData.userInfo.gold;
+    if( gold == null || gold == 'undefined'){
+      wx.showToast({
+        title: '未获取到金币',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
+    var countAmount = 0;
+    params.forEach(element => {
+      countAmount = countAmount + new Number(element.amount);
+    });
+    if(gold < countAmount){
+      wx.showToast({
+        title: '金币不足',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
     wx.request({
-      url: app.globalData.url + '/order/addOrder',
+      url: app.globalData.url + '/order/addOrderList',
       data: {
-        betParam : that.data.betParam
+        userId:userInfo.userId,
+        betParam : that.data.betParam,
+        countAmount:countAmount
       },
       method: 'post',
       success: function (res) {
         var info = res.data;
         if (info.code == 200) {
+          // 下单成功减去金币
+          app.globalData.userInfo.gold = gold - countAmount;
           that.setData({
+            gold:gold - countAmount,
             showModal:false
           })
         } else {
@@ -183,7 +233,6 @@ closeDialog:function(){
         return;
     }
     var param = {
-      'userId':1,
       'plateId':plateId,
       'amount':amount
     }
@@ -194,7 +243,6 @@ closeDialog:function(){
         if(amount >0){
           this.data.betParam[i] = param;
         }else{
-          console.log('amount:'+amount)
           this.data.betParam.splice(i,1);
         }
         console.log(this.data.betParam);
@@ -203,7 +251,7 @@ closeDialog:function(){
     }
     if(amount>0){
       this.data.betParam.push(param);
-      console.log(this.data.betParam);
+      //console.log(this.data.betParam);
     }
   }
 })

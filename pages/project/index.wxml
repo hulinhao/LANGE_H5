@@ -1,17 +1,29 @@
 <view style="height:{{projectBodyHeight}}rpx" class="proPage">
-   <view>
-      <import src ="../head/index.wxml"/>
-      <template is="head" data="{{url:url,gold:gold}}"/>
-   </view>
+   <import src ="../head/index.wxml"/>
+   <template is="head" data="{{url:url,gold:gold}}"/>
+   
    <view class="project">
       <view wx:for="{{proPlate}}" wx:key="index" class="projectCard">
-         <view class="proName" catchtap="showPlate" id='{{item.project.id}}'>
-         {{item.project.name}}</view>
+         <view class="proName" catchtap="showPlate" id='{{item.project.id}}'>{{item.project.name}}</view>
          <image src="/image/icon/{{item.project.img}}" class="proImg"></image>
          <view class="proRemark">{{item.project.remark}} </view>
-         <view wx:for="{{item.plates}}" wx:for-item="plate" wx:key="pk" class="proPlate" style="display:{{isShow[item.project.id]}}">
-               <view>{{plate.content}}</view>
-               <view>{{plate.odds}}</view>
+          <!-- 结果预测 -->   
+         <view  class="table proPlate" style="display:{{isShow[item.project.id]}}" >   
+         <block wx:for="{{item.frtPlateVos}}" wx:for-item="frtPlateVos" wx:key="pk">       
+            <!--            -->
+               <view class="tr">
+                  <view class="td td_1">{{frtPlateVos.forecast.content}}</view>
+                  <!-- 盘口 -->
+                  <view class="td td_2">
+                     <view wx:for="{{frtPlateVos.plates}}" wx:for-item="plate" wx:key="idx" class="plate">
+                        <view class="plate_content">{{plate.content}}</view>
+                        <view class="plate_odds">1:{{plate.odds}}</view>
+                        <input class="plate_amount" type="digit" adjust-position = "true" placeholder="0"  bindblur="plate_amountBlur"></input>
+                        <image src="/image/duihao.png" class="sublimtImg" id="{{plate.id}}" data-orderamount="{{orderamount}}" bindtap = "submitOrder"></image>
+                     </view>
+                  </view>
+               </view>
+         </block>
          </view>
       </view>
    </view>

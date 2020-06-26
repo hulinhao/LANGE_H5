@@ -1,9 +1,7 @@
-  <template name="head">
+<template name="head">
   <view class="mainHeadView"> 
-     <view class="wallet">
          <image src='{{url}}' class="userInfo" background-size="cover" ></image>
          <image src="/image/icon/glod.png" class="glod"></image>
          <text class="glodText">{{gold}}</text>
-      </view>
    </view>
 </template>

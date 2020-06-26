@@ -1,40 +1,35 @@
 // pages/teach/index.js
 const app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     proPlate : null,
     isShow:null,
+    orderamount :0
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.userLogin().then(res => {
-      console.log("promise回调后的数据：");
-      console.log(app.globalData.userInfo);
-      var that = this;
-      wx.getSystemInfo({
-        success: function (res) {         //
-          that.setData({
-            projectBodyHeight: res.windowHeight - (res.windowWidth / 750) * 94,
-            projectContentWidth: res.windowWidth - 100,
-            detailsWidth: res.windowWidth-56-80,
-          })
-        }
-      });
-      //加载head参数
-      app.getHead(that); 
-      that.requestData();
-     })
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {         //
+        that.setData({
+          projectBodyHeight: res.windowHeight - (res.windowWidth / 750) * 94,
+          projectContentWidth: res.windowWidth - 100,
+          detailsWidth: res.windowWidth-56-80,
+        })
+      }
+    });
+
   },
   /**
    * 请求数据
    */
   requestData: function (e) {
+    console.log("加载数据：project")
     var that = this;
       wx.request({
         url: app.globalData.url +'/plate/getProPlate',
@@ -50,14 +45,16 @@ Page({
             proPlate.forEach(element => {
               show[element.project.id] = 'none';
             });
-            that.setData({
-              
+            that.setData({              
               isShow:show
             })
           }
         }
     }); 
   },
+  /**
+   * 显示/隐藏盘口
+   */
   showPlate:function(e){
     var that = this;
     var id = e.currentTarget.id;
@@ -73,18 +70,113 @@ Page({
       isShow:show
     })
   },
+    //下注金额失去焦点
+  plate_amountBlur: function(e){
+      var amount = e.detail.value;
+      //将value 设置到data  绑定到图片的orderAmount 属性
+      this.setData({
+        orderamount:amount
+      });
+    },
+  submitOrder:function(e){
+      var that = this;
+      var amount = e.currentTarget.dataset.orderamount;
+      var plateId = e.currentTarget.id;
+      var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
+      if(!reg.test(amount)&&amount!=''){
+          wx.showToast({
+            title: '请输入正确的数字',
+            icon: 'none',
+            duration: 1500
+          })
+          return;
+      }
+      if(new Number(amount)<=0 || amount == ''||amount == 'undefined'){
+        wx.showToast({
+          title: '请输入正确金额',
+          icon: 'none',
+          duration: 1500
+        })
+        return;
+      }
+      var userInfo = app.globalData.userInfo;
+      if(userInfo == '' || userInfo == null || userInfo == 'undefined'){
+        wx.showToast({
+          title: '请先授权登录',
+          icon: 'none',
+          duration: 1500
+        })
+        return;
+      }
+      var gold = app.globalData.userInfo.gold;
+      if( gold == null || gold == 'undefined'){
+        wx.showToast({
+          title: '未获取到金币',
+          icon: 'none',
+          duration: 1500
+        })
+        return;
+      }
+      if(gold - new Number(amount)<0){
+        wx.showToast({
+          title: '金币不足',
+          icon: 'none',
+          duration: 1500
+        })
+        return;
+      }
+      wx.request({
+        url: app.globalData.url + '/order/addOrder',
+        data: {
+          'plateId':plateId,
+          'amount':amount,
+          'userId':userInfo.userId
+        },
+        method: 'post',
+        success: function (res) {
+          var info = res.data;
+          if (info.code == 200) {
+            // 下单成功减去金币
+            app.globalData.userInfo.gold = gold - amount;
+            that.setData({
+              gold:gold - amount
+            })
+            wx.showToast({
+              title: '投注成功',
+              icon: 'none',
+              duration: 1500
+            })
+          } else {
+            console.log('接口访问失败！！！');
+          }
+        }
+      });
+
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //设置head数据
+    if(app.globalData.userInfo != '' && app.globalData.userInfo != null){
+      this.setData({
+        url: app.globalData.userInfo.avatarUrl,
+        gold: app.globalData.userInfo.gold
+      })
+    }else{
+      this.setData({
+        url: '/image/user.png',
+        gold: '$'
+      })
+    }
+    this.requestData();
   },
 
   /**
