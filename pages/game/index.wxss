@@ -98,11 +98,7 @@ image{
     width:40%;
     justify-content: center;
     text-align: center;
-}
-.merge_td{
-  width:80%;
-  text-align: left;
-  height: 80%;
+    display: inline-block;
 }
 .bg-w{
   background: snow;
@@ -122,6 +118,12 @@ image{
   height: 3rem;
   align-items: center;
 }
+.merge_td{
+  width:80%;
+  text-align: left;
+  height: 80%;
+}
+
 .btndiv{
   position: relative;
   bottom:0px;

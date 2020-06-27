@@ -18,8 +18,8 @@
                      <view wx:for="{{frtPlateVos.plates}}" wx:for-item="plate" wx:key="idx" class="plate">
                         <view class="plate_content">{{plate.content}}</view>
                         <view class="plate_odds">1:{{plate.odds}}</view>
-                        <input class="plate_amount" type="digit" adjust-position = "true" placeholder="0"  bindblur="plate_amountBlur"></input>
-                        <image src="/image/duihao.png" class="sublimtImg" id="{{plate.id}}" data-orderamount="{{orderamount}}" bindtap = "submitOrder"></image>
+                        <input class="plate_amount" type="digit" adjust-position = "true" id="{{plate.id}}" placeholder="0"  bindblur="plate_amountBlur"></input>
+                        <image src="/image/duihao.png" class="sublimtImg" id="{{plate.id}}"  bindtap = "submitOrder"></image>
                      </view>
                   </view>
                </view>

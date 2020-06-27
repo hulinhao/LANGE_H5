@@ -7,7 +7,7 @@ Page({
   data: {
     proPlate : null,
     isShow:null,
-    orderamount :0
+    params : []
   },
   /**
    * 生命周期函数--监听页面加载
@@ -73,15 +73,40 @@ Page({
     //下注金额失去焦点
   plate_amountBlur: function(e){
       var amount = e.detail.value;
+      var id  = e.currentTarget.id;
       //将value 设置到data  绑定到图片的orderAmount 属性
+      var param = {
+        id : id,
+        amount : amount
+      };
+      var arrParam = this.data.params;
+      if(arrParam){
+        for (let i = 0; i < arrParam.length; i++) {
+          const element = arrParam[i];
+          if(element.id == id){
+            arrParam.splice(i,1);
+          }
+        }
+        arrParam.push(param);
+      }else{
+        arrParam = new Array();
+        arrParam.push(param);
+      }
       this.setData({
-        orderamount:amount
+        params : arrParam
       });
     },
   submitOrder:function(e){
       var that = this;
-      var amount = e.currentTarget.dataset.orderamount;
       var plateId = e.currentTarget.id;
+      var amount = 0;
+      if(this.data.params){
+        this.data.params.forEach(element =>{
+          if(element.id == plateId){
+            amount = element.amount;
+          }
+        })
+      }
       var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
       if(!reg.test(amount)&&amount!=''){
           wx.showToast({
@@ -109,22 +134,22 @@ Page({
         return;
       }
       var gold = app.globalData.userInfo.gold;
-      if( gold == null || gold == 'undefined'){
-        wx.showToast({
-          title: '未获取到金币',
-          icon: 'none',
-          duration: 1500
-        })
-        return;
-      }
-      if(gold - new Number(amount)<0){
-        wx.showToast({
-          title: '金币不足',
-          icon: 'none',
-          duration: 1500
-        })
-        return;
-      }
+      // if( gold == null || gold == 'undefined'){
+      //   wx.showToast({
+      //     title: '未获取到金币',
+      //     icon: 'none',
+      //     duration: 1500
+      //   })
+      //   return;
+      // }
+      // if(gold - new Number(amount)<0){
+      //   wx.showToast({
+      //     title: '金币不足',
+      //     icon: 'none',
+      //     duration: 1500
+      //   })
+      //   return;
+      // }
       wx.request({
         url: app.globalData.url + '/order/addOrder',
         data: {

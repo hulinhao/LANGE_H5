@@ -5,13 +5,11 @@
   align-items: center;
 }
 
-
 .usermotto {
   margin-top: 200px;
 }
 
 /****用户信息***/
-
 .list-group {
     padding-left: 0;
     margin: 20px 15px;
@@ -36,6 +34,10 @@
     margin-left: 10px;
     margin-right: 10px;
 }
-/**.list-group-item:last-child {
-  border-bottom: 0px solid #ddd;
-}**/
+
+.userinfo-avatar{
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin-top: 85px;
+}

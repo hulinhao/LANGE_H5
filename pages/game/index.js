@@ -176,26 +176,26 @@ closeDialog:function(){
       return;
     }
     var gold = app.globalData.userInfo.gold;
-    if( gold == null || gold == 'undefined'){
-      wx.showToast({
-        title: '未获取到金币',
-        icon: 'none',
-        duration: 1500
-      })
-      return;
-    }
+    // if( gold == null || gold == 'undefined'){
+    //   wx.showToast({
+    //     title: '未获取到金币',
+    //     icon: 'none',
+    //     duration: 1500
+    //   })
+    //   return;
+    // }
     var countAmount = 0;
     params.forEach(element => {
       countAmount = countAmount + new Number(element.amount);
     });
-    if(gold < countAmount){
-      wx.showToast({
-        title: '金币不足',
-        icon: 'none',
-        duration: 1500
-      })
-      return;
-    }
+    // if(gold < countAmount){
+    //   wx.showToast({
+    //     title: '金币不足',
+    //     icon: 'none',
+    //     duration: 1500
+    //   })
+    //   return;
+    // }
     wx.request({
       url: app.globalData.url + '/order/addOrderList',
       data: {

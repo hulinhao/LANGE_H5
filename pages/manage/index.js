@@ -21,7 +21,7 @@ Page({
     });
   },
   //按钮的点击事件
-bindGetUserInfo: function (res) {
+  bindGetUserInfo: function (res) {
   var that = this;
     let info = res;
     if (info.detail.userInfo) {
@@ -41,7 +41,10 @@ bindGetUserInfo: function (res) {
           }
         })
   }
-},
+  },
+  /**
+   * 登录
+   */
   userLogin:function(){
     var self = app;
     var that = this;
@@ -76,7 +79,7 @@ bindGetUserInfo: function (res) {
                         success: function(res) {
                           if(res.data.status == 1){ //接口请求成功
                             var user = res.data.user;
-                            log.info('登陆成功');
+                            console.log('登陆成功，角色：'+user.type);
                             //用户信息保存到全局变量
                             self.globalData.userInfo={
                               userId:user.id,
@@ -84,6 +87,7 @@ bindGetUserInfo: function (res) {
                               wxOpenid:user.wxOpenid,
                               avatarUrl:user.avatarUrl,
                               name:user.name,
+                              type:user.type,
                               gold:user.gold,
                               payGold:user.payGold,
                               withdrawGold:user.withdrawGold,
@@ -92,9 +96,9 @@ bindGetUserInfo: function (res) {
                               userInfo : {
                                 userId:user.id,
                                 wxName:user.wxName,
-                                wxOpenid:user.wxOpenid,
                                 avatarUrl:user.avatarUrl,
                                 name:user.name,
+                                type:user.type,
                                 gold:user.gold,
                                 payGold:user.payGold,
                                 withdrawGold:user.withdrawGold,
@@ -131,23 +135,29 @@ bindGetUserInfo: function (res) {
       }
     })
   },
-  /**个人信息详情 */
-  clickUserInfo:function(e){
+  /**我的订单 */
+  myOrders:function(e){
       wx.navigateTo({
-        url: '../userInfo/index'
+        url: '../myOrders/index'
       })
   },
-  /**个人课程 */
-  clickCourse: function (e) {
+  /**赔率管理 */
+  odds: function (e) {
     wx.navigateTo({
-      url: '../course/index'
+      url: '../odds/index'
     })
   },
-  /**公司平台信息 */
-  clickCompany: function (e) {
+  /**接单 */
+  takeOrder: function (e) {
     wx.navigateTo({
-      url: '../company/index'
+      url: '../takeOrder/index'
     })
   },
+    /** 所有订单 */
+    orders: function (e) {
+      wx.navigateTo({
+        url: '../orders/index'
+      })
+    },
 })
 

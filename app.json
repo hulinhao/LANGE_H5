@@ -2,12 +2,12 @@
   "pages": [
     "pages/manage/index",
     "pages/game/index",
-    "pages/logs/logs",
     "pages/project/index",
-   
-    "pages/company/index",
-    "pages/course/index",
-    "pages/userInfo/index"
+    "pages/logs/logs",
+    "pages/myOrders/index",
+    "pages/odds/index",
+    "pages/takeOrder/index",
+    "pages/orders/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
