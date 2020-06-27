@@ -43,3 +43,10 @@
   bottom: 12rpx;
   height: 50rpx;
 }
+.say{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: red;
+  font-size: 12px;
+}

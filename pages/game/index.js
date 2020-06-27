@@ -7,6 +7,7 @@ Page({
   data: {
     betParam:[],
     showModal:false,
+    ismanager:false,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -47,7 +48,8 @@ Page({
     if(app.globalData.userInfo != '' && app.globalData.userInfo != null){
       this.setData({
         url: app.globalData.userInfo.avatarUrl,
-        gold: app.globalData.userInfo.gold
+        gold: app.globalData.userInfo.gold,
+        ismanager:app.globalData.userInfo.type == 2?true:false
       })
     }else{
 

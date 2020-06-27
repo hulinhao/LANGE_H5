@@ -27,20 +27,30 @@
                <view class="merge_td">
                    <view wx:for="{{item.plates}}" wx:for-item="plate" wx:key="key" class="childPlate">
                       <view >{{plate.content}}</view>
+                      <block wx:if='{{ismanager}}'>
+                         <view>1:{{plate.odds}}</view>
+                         <button class="editBtn">编辑</button>
+                      </block>
+                      <block wx:if='{{!ismanager}}'>
                       <view>1:{{plate.odds}}</view>
                       <input class="betAmount_2" type="digit" adjust-position = "true" placeholder="0" id="{{plate.id}}" bindblur="amountBlu"></input>
+                      </block>
                    </view>
                </view>
                </block>
                <block wx:elif="{{item.forecast.type == 1}}">
-               <view class="td">
-                        1:{{item.plates[0].odds}}</view>
-               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.plates[0].id}}" bindblur="amountBlu" ></input>
-               </view>
+               <block wx:if='{{ismanager}}'>
+                         <view>1:{{item.plates[0].odds}}</view>
+                         <button class="editBtn">编辑</button>
+               </block>
+               <block wx:if='{{!ismanager}}'>
+               <view class="td">1:{{item.plates[0].odds}}</view>
+               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.plates[0].id}}" bindblur="amountBlu" ></input></view>
+               </block>
                </block>
             </view>
             <view class="tr bg-h" wx:else>
-                <view class="td">{{item.forecast.content}}</view>
+               <view class="td">{{item.forecast.content}}</view>
                <block wx:if="{{item.forecast.type == 2}}">
                <view class="merge_td">
                    <view wx:for="{{item.plates}}" wx:for-item="plate" wx:key="key" class="childPlate">
@@ -60,8 +70,10 @@
          </block>
       </view>
       <view class="btndiv">
+         <block wx:if="{{!ismanager}}">
             <button type="warn" class="submitBtn" bindtap="closeDialog">取消</button>
-            <button type="primary" class="submitBtn" bindtap="submitOrder">竞猜</button>            
+            <button type="primary" class="submitBtn" bindtap="submitOrder">竞猜</button>  
+         </block>          
       </view>
   </view>
 

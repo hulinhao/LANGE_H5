@@ -142,3 +142,8 @@ image{
   border-radius: 10rpx;
 }
 
+.editBtn{
+  display: inline-block;
+  font-size: 12px;
+}
+

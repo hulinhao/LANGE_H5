@@ -3,5 +3,6 @@
          <image src='{{url}}' class="userInfo" background-size="cover" ></image>
          <image src="/image/icon/glod.png" class="glod"></image>
          <text class="glodText">{{gold}}</text>
+         <text class="say">*仅供内部使用，纯属娱乐*</text>
    </view>
 </template>
