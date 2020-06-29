@@ -18,8 +18,15 @@
                      <view wx:for="{{frtPlateVos.plates}}" wx:for-item="plate" wx:key="idx" class="plate">
                         <view class="plate_content">{{plate.content}}</view>
                         <view class="plate_odds">1:{{plate.odds}}</view>
-                        <input class="plate_amount" type="digit" adjust-position = "true" id="{{plate.id}}" placeholder="0"  bindblur="plate_amountBlur"></input>
-                        <image src="/image/duihao.png" class="sublimtImg" id="{{plate.id}}"  bindtap = "submitOrder"></image>
+                        <block wx:if="{{!ismanager}}">
+                           <input class="plate_amount" type="digit" adjust-position = "true" id="{{plate.id}}" placeholder="0"  bindinput="plate_amountBlur"></input>
+                           <image src="/image/duihao.png" class="sublimtImg" id="{{plate.id}}"  bindtap = "submitOrder"></image>
+                        </block>
+                        <block wx:if="{{ismanager}}">
+                           <button type="primary" plain="false" class="editBtn" bindtap="editOdds" id="{{plate.id}}" 
+                                    data-odds="{{plate.odds}}" data-editgameid="{{item.project.id}}" disabled="{{disabledEdit}}">修改
+                                    </button>
+                        </block>
                      </view>
                   </view>
                </view>
@@ -27,4 +34,11 @@
          </view>
       </view>
    </view>
+   <view class="odds-edit" wx:if="{{editShow}}">
+     <view class="fontStyle">1 : <input value="{{editParam.odds}}" class="editOddsInput" bindinput="setOdds"></input></view>
+     <view class="edit-btn">
+        <button type="primary" plain="true" bindtap="canEditOdds">取消</button>
+        <button type="primary" plain="true" style="left:55%" bindtap="submitEdit">确认</button>
+     </view>
+  </view>
 </view>

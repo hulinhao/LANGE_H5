@@ -31,7 +31,8 @@ Page({
         userId : app.globalData.userInfo.userId
       },
       success:function(res){
-        if(res.data.code = 200){
+        console.log(res.data);
+        if(res.data.code == 200){
           that.setData({
              orderList : res.data.data
           })

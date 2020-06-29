@@ -29,11 +29,12 @@
                       <view >{{plate.content}}</view>
                       <block wx:if='{{ismanager}}'>
                          <view>1:{{plate.odds}}</view>
-                         <button type="primary" plain="false" class="editBtn">修改</button>
+                         <button type="primary" plain="false" class="editBtn" bindtap="editOdds" id="{{plate.id}}"
+                          data-odds="{{plate.odds}}" data-editgameid="{{game.id}}" disabled="{{disabledEdit}}">修改</button>
                       </block>
                       <block wx:if='{{!ismanager}}'>
                       <view>1:{{plate.odds}}</view>
-                      <input class="betAmount_2" type="digit" adjust-position = "true" placeholder="0" id="{{plate.id}}" bindblur="amountBlu"></input>
+                      <input class="betAmount_2" type="digit" adjust-position = "true" placeholder="0" id="{{plate.id}}" bindinput="amountBlu"></input>
                       </block>
                    </view>
                </view>
@@ -41,27 +42,29 @@
                <block wx:elif="{{item.forecast.type == 1}}">
                <block wx:if='{{ismanager}}'>
                          <view>1:{{item.plates[0].odds}}</view>
-                         <button type="primary" plain="false" class="editBtn_big">修改</button>
+                         <button type="primary" plain="false" class="editBtn_big" bindtap="editOdds" id="{{item.plates[0].id}}" 
+                          data-odds="{{item.plates[0].odds}}" data-editgameid="{{game.id}}" disabled="{{disabledEdit}}">修改</button>
                </block>
                <block wx:if='{{!ismanager}}'>
                <view class="td">1:{{item.plates[0].odds}}</view>
-               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.plates[0].id}}" bindblur="amountBlu" ></input></view>
+               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.plates[0].id}}" bindinput="amountBlu" ></input></view>
                </block>
                </block>
             </view>
             <view class="tr bg-h" wx:else>
-               <view class="td">{{item.forecast.content}}</view>
+                <view class="td">{{item.forecast.content}}</view>
                <block wx:if="{{item.forecast.type == 2}}">
                <view class="merge_td">
                    <view wx:for="{{item.plates}}" wx:for-item="plate" wx:key="key" class="childPlate">
                       <view >{{plate.content}}</view>
                       <block wx:if='{{ismanager}}'>
                          <view>1:{{plate.odds}}</view>
-                         <button type="primary" plain="false" class="editBtn">修改</button>
+                         <button type="primary" plain="false" class="editBtn" bindtap="editOdds" id="{{plate.id}}" 
+                          data-odds="{{plate.odds}}" data-editgameid="{{game.id}}" disabled="{{disabledEdit}}">修改</button>
                       </block>
                       <block wx:if='{{!ismanager}}'>
                       <view>1:{{plate.odds}}</view>
-                      <input class="betAmount_2" type="digit" adjust-position = "true" placeholder="0" id="{{plate.id}}" bindblur="amountBlu"></input>
+                      <input class="betAmount_2" type="digit" adjust-position = "true" placeholder="0" id="{{plate.id}}" bindinput="amountBlu"></input>
                       </block>
                    </view>
                </view>
@@ -69,11 +72,12 @@
                <block wx:elif="{{item.forecast.type == 1}}">
                <block wx:if='{{ismanager}}'>
                          <view>1:{{item.plates[0].odds}}</view>
-                         <button type="primary" plain="false" class="editBtn_big">修改</button>
+                         <button type="primary" plain="false" class="editBtn_big" bindtap="editOdds" id="{{item.plates[0].id}}" 
+                          data-odds="{{item.plates[0].odds}}" data-editgameid="{{game.id}}" disabled="{{disabledEdit}}">修改</button>
                </block>
                <block wx:if='{{!ismanager}}'>
                <view class="td">1:{{item.plates[0].odds}}</view>
-               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.plates[0].id}}" bindblur="amountBlu" ></input></view>
+               <view class="td"><input class="betAmount" type="digit" adjust-position = "true" placeholder="0" id="{{item.plates[0].id}}" bindinput="amountBlu" ></input></view>
                </block>
                </block>
             </view>
@@ -81,12 +85,23 @@
       </view>
       <view class="btndiv">
          <block wx:if="{{!ismanager}}">
-            <button type="warn" class="submitBtn" bindtap="closeDialog">取消</button>
+            <button type="warn" class="submitBtn" bindtap="closeDialog" >取消</button>
             <button type="primary" class="submitBtn" bindtap="submitOrder">竞猜</button>  
          </block>          
+         <block wx:if="{{ismanager}}">
+            <button type="warn" class="submitBtn" bindtap="closeDialog" >关闭</button>
+         </block>     
       </view>
   </view>
 
+  <view class="odds-edit" wx:if="{{editShow}}">
+     <view> {{editParam.id}}</view>
+     <view class="fontStyle">1 : <input value="{{editParam.odds}}" class="editOddsInput" bindinput="setOdds"></input></view>
+     <view class="edit-btn">
+        <button type="primary" plain="true" bindtap="canEditOdds">取消</button>
+        <button type="primary" plain="true" style="left:55%" bindtap="submitEdit">确认</button>
+     </view>
+  </view>
 </view>
 
 

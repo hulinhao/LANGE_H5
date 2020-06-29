@@ -37,15 +37,13 @@ Page({
         success: function (res) {
           if(res.data.code == 200 ){
             var proPlate = res.data.data;
-            that.setData({
-              proPlate : proPlate
-            })
             // 储存盘口显示的标志
             var show = new Map();
             proPlate.forEach(element => {
               show[element.project.id] = 'none';
             });
-            that.setData({              
+            that.setData({   
+              proPlate : proPlate,           
               isShow:show
             })
           }
@@ -60,7 +58,20 @@ Page({
     var id = e.currentTarget.id;
     var show = that.data.isShow;
     var flag = show[id+''];
-    
+    var proPlate = that.data.proPlate;
+    proPlate.forEach(element => {
+      if(element.project.id == id){
+        if(element.frtPlateVos.length<1){
+          wx.showToast({
+            title: '当前赛事暂无比赛',
+            icon: 'none',
+            duration: 1500
+          })
+          return;
+        }
+      }
+    });
+
     if(flag == 'none'){
       show[id+''] = 'display';
     }else if(flag == 'display'){
@@ -178,6 +189,120 @@ Page({
       });
 
     },
+      //修改赔率 弹框
+  editOdds:function(e){
+    var that = this;
+    var id = e.currentTarget.id;
+    var odds = e.currentTarget.dataset.odds;
+    var editgameid = e.currentTarget.dataset.editgameid;
+    var edit = {
+      id:id,
+      odds:odds,
+    };
+    that.setData({
+      disabledEdit:true,
+      editShow:true,
+      editParam:edit,
+      editgameid:editgameid, 
+    })
+  },
+  canEditOdds:function(){
+    var that = this;
+    var editParam = {
+      id:null,
+      odds:null,
+    };
+    that.setData({
+      disabledEdit:false,
+      editShow:false,
+      editParam:editParam,
+      editgameid:null,
+    })
+  },
+  setOdds:function(e){
+    var that = this;
+    var odds = e.detail.value;
+    var editParam = that.data.editParam;
+    var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
+    if(!reg.test(odds)||odds==''){
+        wx.showToast({
+          title: '赔率格式错误',
+          icon: 'none',
+          duration: 1500
+        })
+        that.setData({
+          editParam:{
+            id:editParam.id,
+            odds:null
+          },
+        });
+        return;
+    }
+  editParam.odds = odds;
+  that.setData({
+    editParam : editParam
+  });
+  },
+  submitEdit:function(){
+    var that = this;
+    var editParam = that.data.editParam;
+    var editgameid = that.data.editgameid;
+    var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
+    if(editParam ==null ||!reg.test(editParam.odds)||editParam.odds==''){
+      wx.showToast({
+        title: '赔率格式错误',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
+    wx.request({
+      url: app.globalData.url +"/plate/editPlate",
+      data:editParam,
+      method:"POST",
+      success:function(res){
+        var data = res.data;
+        if(data.code == 200){
+          wx.showToast({
+            title: '修改成功',
+            icon: 'none',
+            duration: 1500
+          })
+          //重新加载父框的数据
+          wx.request({
+            url: app.globalData.url +'/plate/getProPlate',
+            method: 'post',
+            success: function (res) {
+                if(res.data.code == 200 ){
+                  var proPlate = res.data.data;
+                  // 储存盘口显示的标志
+                  var show = new Map();
+                  proPlate.forEach(element => {
+                    if(element.project.id == editgameid){
+                      show[element.project.id] = 'display';
+                    }else{
+                      show[element.project.id] = 'none';
+                    }
+                    
+                  });
+                  that.setData({   
+                    proPlate : proPlate,           
+                    isShow:show
+                  })
+                }
+              }
+            }); 
+            that.canEditOdds();
+        }else{
+          wx.showToast({
+            title: '修改失败',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -193,7 +318,8 @@ Page({
     if(app.globalData.userInfo != '' && app.globalData.userInfo != null){
       this.setData({
         url: app.globalData.userInfo.avatarUrl,
-        gold: app.globalData.userInfo.gold
+        gold: app.globalData.userInfo.gold,
+        ismanager:app.globalData.userInfo.type == 2?true:false,
       })
     }else{
       this.setData({

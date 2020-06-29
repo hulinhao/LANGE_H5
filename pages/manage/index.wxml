@@ -22,9 +22,9 @@
   <view wx:if="{{userInfo}}" class="list-group">
     <view class="list-group-item" bindtap="myOrders"> 我的下注</view> 
     <block wx:if="{{userInfo.type === 2}}">
-      <view class="list-group-item" bindtap="odds">  赔率管理</view>
-      <view class="list-group-item" bindtap="takeOrder">接单</view>
-      <view class="list-group-item" bindtap="orders">订单</view>
+      <view class="list-group-item" bindtap="orders">所有订单</view>
+      <view class="list-group-item" bindtap="takeOrder">待接单</view>
+      <view class="list-group-item" bindtap="odds">  待赔付</view>
     </block>
   </view>
 </view>

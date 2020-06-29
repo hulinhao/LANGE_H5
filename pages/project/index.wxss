@@ -96,3 +96,58 @@
   width: 67%;
   margin-left: 36%;
 }
+.editBtn{
+
+  display: inline-block;
+  width:2.8rem;
+  height: 0.8rem;
+  min-height: 0.8rem;
+  border-radius: 12px;
+  position: absolute;
+  right: 75rpx;
+  line-height: 0.8rem;
+  font-size: 12px;
+}
+.odds-edit{
+  overflow:auto;
+  overflow-y: scroll; 
+  position: fixed;
+  scroll-margin-top: 200px;
+  background-color: #B6C3CB;
+  top: 30%;
+  border-radius: 10rpx;
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  z-index: 999;
+  margin-left: 20%;
+  height: auto;
+  min-height: 30%;
+  width: 60%;
+}
+.edit-btn{
+  width: 100%;
+}
+.edit-btn button{
+  position: absolute;
+  display: inline-block;
+  width: 35%;
+  height: 60rpx;
+  left: 13%;
+  bottom: 10px;
+  line-height: 60rpx;
+}
+.fontStyle{
+  text-align: center;
+  font-size: 30px;
+  color: #5CCF04;
+  margin-top: 40px;
+}
+.editOddsInput{
+  display: inline-block;
+  width: 90px;
+  height: 30px;
+  color: red;
+  background-color: #fff;
+  line-height: 30px;
+}

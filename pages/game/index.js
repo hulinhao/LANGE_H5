@@ -8,6 +8,14 @@ Page({
     betParam:[],
     showModal:false,
     ismanager:false,
+    disabledEdit:false,
+    editShow:false,
+    editParam:{
+      id:null,
+      odds:null,
+    },
+    // 用于回显查询
+    editgameid:null,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -153,7 +161,11 @@ Page({
 //关闭模态框
 closeDialog:function(){
     this.setData({
-      showModal:false
+      showModal:false,
+      game:null,
+      editParam:null,
+      // 用于回显查询
+      editgameid:null
     })
   },
   //提交下注
@@ -226,7 +238,7 @@ closeDialog:function(){
     var amount = e.detail.value;
     var plateId = e.currentTarget.id;
     var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
-    if(!reg.test(amount)&&amount!=''){
+    if(!reg.test(amount)||amount==''){
         wx.showToast({
           title: '请输入正确的数字',
           icon: 'none',
@@ -255,5 +267,125 @@ closeDialog:function(){
       this.data.betParam.push(param);
       //console.log(this.data.betParam);
     }
+  },
+  //修改赔率 弹框
+  editOdds:function(e){
+    var that = this;
+    var id = e.currentTarget.id;
+    var odds = e.currentTarget.dataset.odds;
+    var editgameid = e.currentTarget.dataset.editgameid;
+    var edit = {
+      id:id,
+      odds:odds,
+    };
+
+    that.setData({
+      disabledEdit:true,
+      editShow:true,
+      editParam:edit,
+      editgameid:editgameid, 
+    })
+  },
+  canEditOdds:function(){
+    var that = this;
+    var editParam = {
+      id:null,
+      odds:null,
+    };
+    that.setData({
+      disabledEdit:false,
+      editShow:false,
+      editParam:editParam,
+      editgameid:null,
+    })
+  },
+  setOdds:function(e){
+    var that = this;
+    var odds = e.detail.value;
+    var editParam = that.data.editParam;
+    var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
+    if(!reg.test(odds)||odds==''){
+        wx.showToast({
+          title: '赔率格式错误',
+          icon: 'none',
+          duration: 1500
+        })
+        that.setData({
+          editParam:{
+            id:editParam.id,
+            odds:null
+          },
+        });
+        return;
+    }
+  editParam.odds = odds;
+  that.setData({
+    editParam : editParam
+  });
+  },
+  submitEdit:function(){
+    var that = this;
+    var editParam = that.data.editParam;
+    var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
+ 
+    if(editParam == null||!reg.test(editParam.odds)||editParam.odds==''){
+      wx.showToast({
+        title: '赔率格式错误',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
+    wx.request({
+      url: app.globalData.url +"/plate/editPlate",
+      data:editParam,
+      method:"POST",
+      success:function(res){
+        var data = res.data;
+        if(data.code == 200){
+          wx.showToast({
+            title: '修改成功',
+            icon: 'none',
+            duration: 1500
+          })
+          //重新加载父框的数据
+          wx.request({
+            url: app.globalData.url + '/plate/getGamePlate',
+            data: {
+              gameId : that.data.editgameid
+            },
+            method: 'post',
+            success: function (res) {
+              var info = res.data;
+              if (info.code === '200') {
+                if(info.data.frtPlateVos.length > 0){
+                  that.setData({
+                    game:info.data.gameVo,
+                    gameFrtPlateVo: info.data.frtPlateVos,
+                    betParam:[], // 打开盘口之前将下注参数清空
+                    showModal:true
+                  })
+                }else{
+                  wx.showToast({
+                    title: '暂未开始竞猜',
+                    icon: 'none',
+                    duration: 1500
+                  })
+                }
+              } else {
+                console.log('接口访问失败！！！');
+              }
+            }
+          });
+          that.canEditOdds();
+        }else{
+          wx.showToast({
+            title: '修改失败',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      }
+    })
   }
 })
