@@ -1,0 +1,23 @@
+<!--wxml-->
+<view>
+    <block wx:for-items="{{courseList}}" >
+      <view class="teacherText">
+          <view> id:    	       {{item.id                }}</view>
+          <view> userId:    	   {{item.userId            }}</view>
+          <view> userWx:    	   {{item.userWx            }}</view>
+          <view> courseName:     {{item.courseName        }}</view>
+          <view> courseId:    	 {{item.courseId          }}</view>
+          <view> teacherId:    	 {{item.teacherId         }}</view>
+          <view> number:    	   {{item.number            }}</view>
+          <view> totalAmount:    {{item.totalAmount       }}</view>
+          <view> discountAmount: {{item.discountAmount    }}</view>
+          <view> payableAmount:  {{item.payableAmount     }}</view>
+          <view> paidAmount:     {{item.paidAmount        }}</view>
+          <view> type:    	     {{item.type              }}</view>
+          <view> createTime:     {{item.createTime        }}</view>
+          <view> updateTime:     {{item.updateTime        }}</view>
+      </view>
+      <!-- 分割线 -->
+      <view class="line"></view>
+    </block>
+</view>

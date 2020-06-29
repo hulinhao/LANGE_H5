@@ -1,0 +1,72 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width:60px;
+  height:60px;
+  margin-top:40px;
+  border-radius:50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+/****用户信息***/
+
+.list-group {
+    padding-left: 0;
+    margin: 20px 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+   /** border: 1px solid #ddd;**/
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 50%;
+}
+.list-group-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.row{
+  padding: 8px 0px;
+  width: 96%;
+  margin: 2% auto;
+}
+.key{
+  width: 400px;
+  color:#241D15;
+  font-size: 14px;
+}
+.value{
+  width: 400px;
+  color:#ccc;
+  font-size: 12px;
+  margin-right: 20px;
+  clear: both;
+}
+.icon{
+  height:13px;
+  width:13px;
+  float:right;
+  font-weight: 
+}

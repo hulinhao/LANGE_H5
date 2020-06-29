@@ -1,0 +1,45 @@
+<!--wxml-->
+<view>
+   <view style='text-align:center;margin-bottom: 100px;'>
+      <image src='../../photo/my.jpg' class="userinfo-avatar" background-size="cover"></image> </view>
+   
+   <view class="row"><text class = "key">用户名</text><text class = "value">{{name}}</text>
+      <image src="../../image/right.png" class="icon"/>
+   </view>
+      <!-- 分割线 -->
+   <view class="line"></view>
+   <view class="row"><text class = "key">手机号</text><text class = "value">{{phone}}</text>
+    <image src="../../image/right.png" class="icon"/>
+   </view>
+      <!-- 分割线 -->
+   <view class="line"></view>
+   <view class="row"><text class = "key">地址</text><text class = "value">{{adress}}</text>
+     <image src="../../image/right.png" class="icon"/>
+   </view>
+      <!-- 分割线 -->
+   <view class="line"></view>
+   <view class="row"><text class = "key">性别</text><text class = "value">{{sex}}</text>
+     <image src="../../image/right.png" class="icon"/>
+   </view>
+      <!-- 分割线 -->
+   <view class="line"></view>
+   <view class="row"><text class = "key">角色</text><text class = "value">{{role}}</text>
+     <image src="../../image/right.png" class="icon"/>
+   </view>
+      <!-- 分割线 -->
+   <view class="line"></view>
+   <view class="row"><text class = "key">签名</text><text class = "value">{{signature}}</text>
+     <image src="../../image/right.png" class="icon"/>
+   </view>
+      <!-- 分割线 -->
+   <view class="line"></view>
+   <view class="row"><text class = "key">会员等级</text><text class = "value">{{level}}</text>
+      <image src="../../image/right.png" class="icon"/>
+   </view>
+      <!-- 分割线 -->
+   <view class="line"></view>
+   <view class="row"><text class = "key">个人介绍</text><text class = "value">{{personalProfile}}</text>
+      <image src="../../image/right.png" class="icon"/>
+   </view>
+
+</view>
