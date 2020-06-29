@@ -8,6 +8,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: null,
     userInfoPageHeight: 0,
+    loading:false,
   },
   onLoad: function () {
     var that =this;
@@ -48,6 +49,10 @@ Page({
   userLogin:function(){
     var self = app;
     var that = this;
+    //登录样式
+    that.setData({
+      loading : !that.data.loading
+    })
     wx.getSetting({
       success(res){
         log.info('getSetting:'+JSON.stringify(res));
@@ -106,31 +111,55 @@ Page({
                             })
 
                           } else {
-                            log.info('请求失败');
+                            wx.showToast({
+                              title: '登录失败',
+                              icon: 'none',
+                              duration: 1500
+                            })
                             console.log('解密失败')
                           }            
+                          that.setData({
+                            loading : !that.data.loading
+                          })
                         },
                         fail: function () {
-                          console.log('系统错误111')
+                            wx.showToast({
+                              title: '系统错误',
+                              icon: 'none',
+                              duration: 1500
+                            })
+                            console.log('系统错误！')
+                            that.setData({
+                              loading : !that.data.loading
+                            })
                         }
                       })
                     },
                     fail: function () {
                       console.log('获取用户信息失败')
+                      that.setData({
+                        loading : !that.data.loading
+                      })
                     }
                   })
                 } else {
                   console.log('获取用户登录态失败！' + r.errMsg)
+                  that.setData({
+                    loading : !that.data.loading
+                  })
                 }
               },
               fail: function () {
                 log.info('登陆失败')
                 console.log('登陆失败')
+                that.setData({
+                  loading : !that.data.loading
+                })
               }
             })
-        } else {
+        } else {          
           log.info('获取用户信息失败')
-            console.log('获取用户信息失败')
+          console.log('获取用户信息失败')
         }
       }
     })
