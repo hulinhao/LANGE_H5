@@ -95,6 +95,7 @@ image{
   align-items: center;
 }
 .td {
+  border: 1px solid red;
     width:40%;
     justify-content: center;
     text-align: center;
@@ -144,6 +145,13 @@ image{
 
 .editBtn{
   display: inline-block;
+  height: 30rpx;
   font-size: 12px;
+  line-height: 30rpx;
+}
+.editBtn_big{
+  height: 50rpx;
+  font-size: 15px;
+  line-height: 50rpx;
 }
 

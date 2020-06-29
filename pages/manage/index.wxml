@@ -10,8 +10,9 @@
         <view style="text-align:center"><text class="userinfo-nickname">{{userInfo.wxName}}</text></view>
       </view>
       <view wx:if="{{!userInfo}}" style="text-align:center;margin-top:150px;">
-        欢迎来到个人中心
-        <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" style="width:80px;margin-top:20px;" >登录</button>
+        请登录
+        <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" loading="{{loading}}" style="width:100px;margin-top:20px;"
+                          type="primary" plain="false">登录</button>
         <view wx:else>请升级微信版本</view>
       </view>    
     </view>
