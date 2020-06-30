@@ -9,6 +9,7 @@ Page({
     userInfo: null,
     userInfoPageHeight: 0,
     loading:false,
+    myname:null
   },
   onLoad: function () {
     var that =this;
@@ -109,7 +110,6 @@ Page({
                                 withdrawGold:user.withdrawGold,
                               }
                             })
-
                           } else {
                             wx.showToast({
                               title: '登录失败',
@@ -163,6 +163,7 @@ Page({
         }
       }
     })
+    
   },
   /**我的订单 */
   myOrders:function(e){
@@ -186,6 +187,46 @@ Page({
     orders: function (e) {
       wx.navigateTo({
         url: '../orders/index'
+      })
+    },
+    inputName:function(e){
+      var name = e.detail.value;
+      this.setData({
+        myname:name
+      });
+    },
+    setName:function(){
+      var that = this;
+      var name = that.data.myname;
+      var userInfo = that.data.userInfo;
+      if(name == null || name == '' || name =='undefined'){
+        wx.showToast({
+          title: '请输入姓名',
+          icon: 'none',
+          duration: 1200
+        })
+        return;
+      }
+      wx.request({
+        url: app.globalData.url +"user/setName",
+        method:'POST',
+        data:{
+          userId:userInfo.userId,
+          name :name
+        },
+        success:function(res){
+          if(res.data.code == 200){
+            wx.showToast({
+              title: '设置成功',
+              icon: 'none',
+              duration: 1200
+            })
+            userInfo.name = res.data.data.name;
+            that.setData({
+              userInfo:userInfo
+            });
+          }
+        }
       })
     },
 })

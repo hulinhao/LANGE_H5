@@ -86,7 +86,7 @@
       <view class="btndiv">
          <block wx:if="{{!ismanager}}">
             <button type="warn" class="submitBtn" bindtap="closeDialog" >取消</button>
-            <button type="primary" class="submitBtn" bindtap="submitOrder">竞猜</button>  
+            <button type="primary" class="submitBtn" bindtap="submitOrder" disabled="{{disabledSub}}">竞猜</button>  
          </block>          
          <block wx:if="{{ismanager}}">
             <button type="warn" class="submitBtn" bindtap="closeDialog" >关闭</button>

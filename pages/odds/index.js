@@ -32,12 +32,12 @@ Page({
           if(orders != null){
             orders.forEach(element => {
               element.color = "#1AAD19";
+              element.disabled = false;
             });
           }
           that.setData({
              orderList : orders,
           })
-          console.log(JSON.stringify(that.data.orderList))
         }
       },
       fail:function(res){
@@ -47,38 +47,27 @@ Page({
   },
   editOrder:function(e){
     var taht = this;
-    var id = e.currentTarget.id;
+    var userId = e.currentTarget.id;
     var orderList = taht.data.orderList;
     wx.request({
-      url: app.globalData.url + 'order/takeOrder',
+      url: app.globalData.url + 'order/takePaidOrders',
       method:"POST",
       data:{
-        id:id
+        userId:userId
       },
       success:function(res){
         var data = res.data;
         if(data.code == 200){
-          if(data.data){
             wx.showToast({
-              title: '已接单',
+              title: '已赔付',
               icon: 'none',
               duration: 1200
-            })
-          }else{
-            wx.showToast({
-              title: '已取消',
-              icon: 'none',
-              duration: 1200
-            })
-          }
+            })          
           if(orderList != null){
             orderList.forEach(element=>{
-              if(element.billsId == id){
-                if(element.color == "#1AAD19"){
-                   element.color = "#ccc";
-                 }else if(element.color == "#ccc"){
-                   element.color = "#1AAD19";
-                 }
+              if(element.userId == userId){
+                element.disabled = true;
+                element.color = "#ccc";
               }
             });
             taht.setData({
@@ -87,7 +76,7 @@ Page({
           }
         }else{
           wx.showToast({
-            title: '失败！',
+            title: '赔付失败',
             icon: 'none',
             duration: 1200
           })

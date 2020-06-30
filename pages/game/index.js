@@ -9,6 +9,7 @@ Page({
     showModal:false,
     ismanager:false,
     disabledEdit:false,
+    disabledSub:false,
     editShow:false,
     editParam:{
       id:null,
@@ -171,6 +172,10 @@ closeDialog:function(){
   //提交下注
   submitOrder: function(){
     var that = this;
+    //防止重复提交
+    that.setData({
+      disabledSub:true
+    });
     var params = that.data.betParam;
     if(params.length<1){
       wx.showToast({
@@ -229,7 +234,15 @@ closeDialog:function(){
           })
         } else {
           console.log('接口访问失败！！！');
-        }
+        }      
+      that.setData({
+        disabledSub:false
+      }); 
+      },
+      fail:function(res){
+        that.setData({
+          disabledSub:false
+        }); 
       }
     });
   },
@@ -327,7 +340,7 @@ closeDialog:function(){
     var that = this;
     var editParam = that.data.editParam;
     var reg = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
- 
+
     if(editParam == null||!reg.test(editParam.odds)||editParam.odds==''){
       wx.showToast({
         title: '赔率格式错误',

@@ -7,7 +7,8 @@ Page({
   data: {
     proPlate : null,
     isShow:null,
-    params : []
+    params : [],
+    disabledSub:false,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -109,6 +110,10 @@ Page({
     },
   submitOrder:function(e){
       var that = this;
+      //防止重复提交
+      that.setData({
+        disabledSub:true
+      });
       var plateId = e.currentTarget.id;
       var amount = 0;
       if(this.data.params){
@@ -185,11 +190,18 @@ Page({
           } else {
             console.log('接口访问失败！！！');
           }
+          that.setData({
+            disabledSub:false
+          });
+        },fail:function(res){
+          that.setData({
+            disabledSub:false
+          });
         }
       });
 
     },
-      //修改赔率 弹框
+  //修改赔率 弹框
   editOdds:function(e){
     var that = this;
     var id = e.currentTarget.id;

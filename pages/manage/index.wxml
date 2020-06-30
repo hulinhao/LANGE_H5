@@ -20,11 +20,19 @@
   
   <!--个人信息-->
   <view wx:if="{{userInfo}}" class="list-group">
-    <view class="list-group-item" bindtap="myOrders"> 我的下注</view> 
     <block wx:if="{{userInfo.type === 2}}">
       <view class="list-group-item" bindtap="orders">所有订单</view>
       <view class="list-group-item" bindtap="takeOrder">待接单</view>
       <view class="list-group-item" bindtap="odds">  待赔付</view>
+    </block>
+    <block wx:else>
+      <block wx:if="{{userInfo.name == null ||userInfo.name == ''}}">
+      <input class="myname" bindinput="inputName"></input>
+      <button  bindtap="setName">
+        绑定姓名
+      </button>
+        </block>
+    <view class="list-group-item" bindtap="myOrders"> 我的下注</view> 
     </block>
   </view>
 </view>

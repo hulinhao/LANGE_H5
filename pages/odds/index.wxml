@@ -3,12 +3,18 @@
       <view class="table">
         <block wx:for="{{orderList}}" wx:for-item="pv" wx:key="key">
         <view wx:if="{{index % 2 == 0}}"  class="userView">
+         <view class="bg-g user_head">
+              <view class="userName">{{pv.proBillsVos[0].billsInfos[0].name}}</view>
+              <view class="wxName">{{pv.proBillsVos[0].billsInfos[0].wxName}}</view>
+              <view class="btnView">
+              <button type="primary" class="editOrder" bindtap="editOrder" plain="true" id="{{pv.userId}}" style="color:{{pv.color}}" disabled="{{pv.disabled}}">赔付</button> 
+              </view>    
+               <view class="countAmount">{{pv.countAmount}}</view>
+        </view>
         <block wx:for="{{pv.proBillsVos}}" wx:for-item="proBillsVos" wx:key="key">
             <view class="tr bg-g" >            
               <view class="va">       
                 <view class="proName">{{proBillsVos.billsInfos[0].proName}}</view>
-                <view class="userName">{{proBillsVos.billsInfos[0].name}}</view>
-                <view class="wxName">{{proBillsVos.billsInfos[0].wxName}}</view>
               </view>  
               <block wx:for="{{proBillsVos.billsInfos}}"  wx:for-item="item" wx:key="key">
                 <view class="vd">
@@ -26,21 +32,28 @@
                       <view class="td td_big td_big3">{{item.forecastContent}}</view>
                       <view class="td">{{item.plateContent}}</view>
                     </block>
-                    <view class="td">1:{{item.odds}}</view>
+                    
                     <view class="td">{{item.amount}}</view>
-                    <button type="primary" class="editOrder" bindtap="editOrder" plain="true" id="{{item.billsId}}" style="color:{{item.color}}">接单</button>                     
+                    <view class="td">1:{{item.odds}}</view>
+                    <view class="td" style="color:#BB7156">{{item.settlementAmount}}</view>                
                 </view>       
               </block>     
             </view>
          </block>
         </view>
         <view class="userView" wx:else>
+        <view class="bg-h user_head">
+              <view class="userName">{{pv.proBillsVos[0].billsInfos[0].name}}</view>
+              <view class="wxName">{{pv.proBillsVos[0].billsInfos[0].wxName}}</view>
+              <view class="btnView">
+              <button type="primary" class="editOrder" bindtap="editOrder" plain="true" id="{{pv.userId}}" style="color:{{pv.color}}" disabled="{{pv.disabled}}">赔付</button> 
+              </view>
+              <view class="countAmount">{{pv.countAmount}}</view>    
+        </view>
         <block wx:for="{{pv.proBillsVos}}" wx:for-item="proBillsVos" wx:key="key">
             <view class="tr bg-h" >
               <view class="va">       
                 <view class="proName">{{proBillsVos.billsInfos[0].proName}}</view>
-                <view class="userName">{{proBillsVos.billsInfos[0].name}}</view>
-                <view class="wxName">{{proBillsVos.billsInfos[0].wxName}}</view>
               </view>  
               <block wx:for="{{proBillsVos.billsInfos}}" wx:for-item="item" wx:key="key">
               <view class="vd">
@@ -58,9 +71,10 @@
                     <view class="td td_big td_big3">{{item.forecastContent}}</view>
                     <view class="td">{{item.plateContent}}</view>
                   </block>
+                  
+                  <view class="td">{{item.amount}}</view>  
                   <view class="td">1:{{item.odds}}</view>
-                  <view class="td">{{item.amount}}</view>
-                  <button type="primary" class="editOrder" bindtap="editOrder" plain="true" id="{{item.billsId}}" style="color:{{item.color}}">接单</button>                     
+                  <view class="td" style="color:#BB7156">{{item.settlementAmount}}</view>               
               </view>       
               </block>           
             </view>

@@ -20,7 +20,7 @@
                         <view class="plate_odds">1:{{plate.odds}}</view>
                         <block wx:if="{{!ismanager}}">
                            <input class="plate_amount" type="digit" adjust-position = "true" id="{{plate.id}}" placeholder="0"  bindinput="plate_amountBlur"></input>
-                           <image src="/image/duihao.png" class="sublimtImg" id="{{plate.id}}"  bindtap = "submitOrder"></image>
+                           <image src="/image/duihao.png" class="sublimtImg" id="{{plate.id}}"  bindtap = "{{disabledSub?'':'submitOrder'}}" ></image>
                         </block>
                         <block wx:if="{{ismanager}}">
                            <button type="primary" plain="false" class="editBtn" bindtap="editOdds" id="{{plate.id}}" 
