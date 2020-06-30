@@ -3,12 +3,10 @@
     "pages/manage/index",
     "pages/game/index",
     "pages/project/index",
-    "pages/logs/logs",
-    "pages/myOrders/index",
-    "pages/odds/index",
-    "pages/takeOrder/index",
-    "pages/orders/index"
+    "pages/logs/logs"
+
   ],
+
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#e5e5e5",

@@ -23,8 +23,8 @@
                       <view class="td td_big ">{{item.forecastContent}}</view>
                     </block>
                     <block wx:if="{{item.forecastType == 2}}"> 
-                      <view class="td td_big">{{item.pone}}vs{{item.ptwo}}</view>
-                      <view class="td td_big">{{item.forecastContent}}</view>
+                      <view class="td td_big_4">{{item.pone}}vs{{item.ptwo}}({{item.forecastContent}})</view>
+
                       <view class="td">{{item.plateContent}}</view>
                     </block>
                   </block>
@@ -54,8 +54,7 @@
                       <view class="td td_big ">{{item.forecastContent}}</view>
                     </block>
                     <block wx:if="{{item.forecastType == 2}}"> 
-                      <view class="td td_big">{{item.pone}}vs{{item.ptwo}}</view>
-                      <view class="td td_big">{{item.forecastContent}}</view>
+                      <view class="td td_big_4">{{item.pone}}vs{{item.ptwo}}({{item.forecastContent}})</view>
                       <view class="td">{{item.plateContent}}</view>
                     </block>
                   </block>

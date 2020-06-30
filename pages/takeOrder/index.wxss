@@ -1,72 +1,92 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: row;
+.table {
+
+}
+.tr {
+  width: 100%;
+  height: 2.5rem;
   align-items: center;
 }
-
-.userinfo-avatar {
-  width:60px;
-  height:60px;
-  margin-top:40px;
-  border-radius:50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-  font-size: 14px;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
-
-/****用户信息***/
-
-.list-group {
-    padding-left: 0;
-    margin: 20px 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-   /** border: 1px solid #ddd;**/
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    height: 50%;
-}
-.list-group-item:first-child {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: 10px 15px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    box-sizing: border-box;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-.row{
-  padding: 8px 0px;
-  width: 96%;
-  margin: 2% auto;
-}
-.key{
-  width: 400px;
-  color:#241D15;
-  font-size: 14px;
-}
-.value{
-  width: 400px;
-  color:#ccc;
+.proName{
+  display: inline-block;
+  width: 60%;
   font-size: 12px;
-  margin-right: 20px;
-  clear: both;
+  color: #99CC33;
 }
-.icon{
-  height:13px;
-  width:13px;
-  float:right;
-  font-weight: 
+.userName{
+  display: inline-block;
+  position: relative;
+  width: 18%;
+  font-size: 10px;
+  color: red;
+  top: 0;
+  text-align: right;
+}
+.wxName{
+  display: inline-block;
+  position: relative;
+  width: 20%;
+  font-size: 10px;
+  color: #FF9D9B;
+  top: 0;
+  text-align: right;
+}
+.vd{
+  width: 100%;
+}
+.va{
+  padding-top: 0;
+  line-height: 14px;
+}
+.editOrder{
+  display: inline-flex;
+  width: 50px;
+  height: 20px;
+  font-size: 15px;
+  padding: 0 0 0 0;
+  line-height: 20px;
+  justify-content: center; 
+  align-items:center;
+}
+.td {
+    width: 15%;
+    max-width:15%;
+    justify-content: center;
+    text-align: center;
+    display: inline-block;
+    text-overflow: ellipsis;
+    font-size: 12px;
+}
+.td_big{
+  width: 20%;
+  max-width:20%;
+}
+.td_big2{
+  width: 35%;
+  max-width:35%;
+}
+.td_big3{
+  width: 40%;
+  max-width:40%;
+}
+.td_big_4{
+  width: 40%;
+  max-width:40%;
+}
+.bg-w{
+  background: snow;
+}
+.bg-g{
+  background: #E6F3F9;
+}
+.bg-h{
+  background: #F5F5F5;
+}
+.th {
+  width: 1/7;
+  justify-content: center;
+  background: #3366FF;
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
 }

@@ -259,7 +259,7 @@ closeDialog:function(){
         }else{
           this.data.betParam.splice(i,1);
         }
-        console.log(this.data.betParam);
+        //console.log(this.data.betParam);
         return;
       }
     }

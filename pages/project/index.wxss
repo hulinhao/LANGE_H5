@@ -106,7 +106,8 @@
   position: absolute;
   right: 75rpx;
   line-height: 0.8rem;
-  font-size: 12px;
+  font-size:0.8rem;
+  padding: 0 0 0 0;
 }
 .odds-edit{
   overflow:auto;

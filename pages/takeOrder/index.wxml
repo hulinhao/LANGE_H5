@@ -1,45 +1,59 @@
 <!--wxml-->
 <view>
-   <view style='text-align:center;margin-bottom: 100px;'>
-      <image src='../../photo/my.jpg' class="userinfo-avatar" background-size="cover"></image> </view>
-   
-   <view class="row"><text class = "key">用户名</text><text class = "value">{{name}}</text>
-      <image src="../../image/right.png" class="icon"/>
-   </view>
-      <!-- 分割线 -->
-   <view class="line"></view>
-   <view class="row"><text class = "key">手机号</text><text class = "value">{{phone}}</text>
-    <image src="../../image/right.png" class="icon"/>
-   </view>
-      <!-- 分割线 -->
-   <view class="line"></view>
-   <view class="row"><text class = "key">地址</text><text class = "value">{{adress}}</text>
-     <image src="../../image/right.png" class="icon"/>
-   </view>
-      <!-- 分割线 -->
-   <view class="line"></view>
-   <view class="row"><text class = "key">性别</text><text class = "value">{{sex}}</text>
-     <image src="../../image/right.png" class="icon"/>
-   </view>
-      <!-- 分割线 -->
-   <view class="line"></view>
-   <view class="row"><text class = "key">角色</text><text class = "value">{{role}}</text>
-     <image src="../../image/right.png" class="icon"/>
-   </view>
-      <!-- 分割线 -->
-   <view class="line"></view>
-   <view class="row"><text class = "key">签名</text><text class = "value">{{signature}}</text>
-     <image src="../../image/right.png" class="icon"/>
-   </view>
-      <!-- 分割线 -->
-   <view class="line"></view>
-   <view class="row"><text class = "key">会员等级</text><text class = "value">{{level}}</text>
-      <image src="../../image/right.png" class="icon"/>
-   </view>
-      <!-- 分割线 -->
-   <view class="line"></view>
-   <view class="row"><text class = "key">个人介绍</text><text class = "value">{{personalProfile}}</text>
-      <image src="../../image/right.png" class="icon"/>
-   </view>
-
+      <view class="table">
+         <block wx:for="{{orderList}}" wx:for-item="item" wx:key="key">
+            <view class="tr bg-g" wx:if="{{index % 2 == 0}}">            
+              <view class="va">       
+                <view class="proName">{{item.proName}}</view>
+                <view class="userName">{{item.name}}</view>
+                <view class="wxName">{{item.wxName}}</view>
+              </view>  
+              <view class="vd">
+                  <block wx:if="{{item.relate == 1}}">
+                    <block wx:if="{{item.forecastType == 1}}"> 
+                      <view class="td td_big2">{{item.pone}}vs{{item.ptwo}}</view>
+                      <view class="td td_big ">{{item.forecastContent}}</view>
+                    </block>
+                    <block wx:if="{{item.forecastType == 2}}"> 
+                      <view class="td td_big_4">{{item.pone}}vs{{item.ptwo}}({{item.forecastContent}})</view>
+                      <view class="td">{{item.plateContent}}</view>
+                    </block>
+                  </block>
+                  <block wx:if="{{item.relate == 2}}">
+                    <view class="td td_big td_big3">{{item.forecastContent}}</view>
+                    <view class="td">{{item.plateContent}}</view>
+                  </block>
+                  <view class="td">1:{{item.odds}}</view>
+                  <view class="td">{{item.amount}}</view>
+                  <button type="primary" class="editOrder" bindtap="editOrder" plain="true" id="{{item.billsId}}" style="color:{{item.color}}">接单</button>                     
+              </view>            
+            </view>
+            <view class="tr bg-h" wx:else>
+              <view class="va">       
+                <view class="proName">{{item.proName}}</view>
+                <view class="userName">{{item.name}}</view>
+                <view class="wxName">{{item.wxName}}</view>
+              </view>  
+              <view class="vd">
+                  <block wx:if="{{item.relate == 1}}">
+                    <block wx:if="{{item.forecastType == 1}}"> 
+                      <view class="td td_big2">{{item.pone}}vs{{item.ptwo}}</view>
+                      <view class="td td_big ">{{item.forecastContent}}</view>
+                    </block>
+                    <block wx:if="{{item.forecastType == 2}}"> 
+                      <view class="td td_big_4">{{item.pone}}vs{{item.ptwo}}({{item.forecastContent}})</view>
+                      <view class="td">{{item.plateContent}}</view>
+                    </block>
+                  </block>
+                  <block wx:if="{{item.relate == 2}}">
+                    <view class="td td_big td_big3">{{item.forecastContent}}</view>
+                    <view class="td">{{item.plateContent}}</view>
+                  </block>
+                  <view class="td">1:{{item.odds}}</view>
+                  <view class="td">{{item.amount}}  {{colorParam[item.id]}} </view>
+                  <button type="primary" class="editOrder" bindtap="editOrder" plain="true" id="{{item.billsId}}" style="color:{{item.color}}">接单</button>        
+              </view>               
+            </view>
+         </block>
+    </view>
 </view>

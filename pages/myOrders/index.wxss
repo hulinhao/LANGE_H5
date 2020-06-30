@@ -35,6 +35,10 @@
   width: 40%;
   max-width:40%;
 }
+.td_big_4{
+  width: 40%;
+  max-width:40%;
+}
 .bg-w{
   background: snow;
 }

@@ -2,10 +2,12 @@
 <view>
       <view class="table">
          <block wx:for="{{orderList}}" wx:for-item="item" wx:key="key">
-            <view class="tr bg-g" wx:if="{{index % 2 == 0}}">            
+            <view class="tr bg-g" wx:if="{{index % 2 == 0}}">   
+              <view class="va">       
               <view class="proName">{{item.proName}}</view>
               <view class="userName">{{item.name}}</view>
               <view class="wxName">{{item.wxName}}</view>
+              </view>  
               <view class="vd">
                   <block wx:if="{{item.relate == 1}}">
                     <block wx:if="{{item.forecastType == 1}}"> 
@@ -13,8 +15,8 @@
                       <view class="td td_big ">{{item.forecastContent}}</view>
                     </block>
                     <block wx:if="{{item.forecastType == 2}}"> 
-                      <view class="td td_big">{{item.pone}}vs{{item.ptwo}}</view>
-                      <view class="td td_big">{{item.forecastContent}}</view>
+                      <view class="td td_big_4">{{item.pone}}vs{{item.ptwo}}({{item.forecastContent}})</view>
+
                       <view class="td">{{item.plateContent}}</view>
                     </block>
                   </block>
@@ -36,7 +38,11 @@
               </view>            
             </view>
             <view class="tr bg-h" wx:else>
-              <view class="proName">{{item.proName}}</view>
+              <view class="va">       
+                <view class="proName">{{item.proName}}</view>
+                <view class="userName">{{item.name}}</view>
+                <view class="wxName">{{item.wxName}}</view>
+              </view>  
               <view class="vd">
                   <block wx:if="{{item.relate == 1}}">
                     <block wx:if="{{item.forecastType == 1}}"> 
@@ -44,8 +50,8 @@
                       <view class="td td_big ">{{item.forecastContent}}</view>
                     </block>
                     <block wx:if="{{item.forecastType == 2}}"> 
-                      <view class="td td_big">{{item.pone}}vs{{item.ptwo}}</view>
-                      <view class="td td_big">{{item.forecastContent}}</view>
+                      <view class="td td_big_4">{{item.pone}}vs{{item.ptwo}}({{item.forecastContent}})</view>
+
                       <view class="td">{{item.plateContent}}</view>
                     </block>
                   </block>

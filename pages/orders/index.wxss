@@ -7,25 +7,32 @@
   align-items: center;
 }
 .proName{
+  display: inline-block;
   width: 60%;
-  font-size: 10px;
+  font-size: 12px;
   color: #99CC33;
 }
 .userName{
-  position: absolute;
-  width: 20%;
-  font-size: 12px;
+  display: inline-block;
+  position: relative;
+  width: 18%;
+  font-size: 10px;
   color: red;
-  right: 30px;
   top: 0;
+  text-align: right;
 }
 .wxName{
-  position: absolute;
-  width: 10%;
-  font-size: 12px;
+  display: inline-block;
+  position: relative;
+  width: 20%;
+  font-size: 10px;
   color: #FF9D9B;
-  right: 1px;
   top: 0;
+  text-align: right;
+}
+.va{
+  padding-top: 0;
+  line-height: 14px;
 }
 .vd{
   width: 100%;
@@ -51,6 +58,10 @@
   width: 40%;
   max-width:40%;
 }
+.td_big_4{
+  width: 40%;
+  max-width:40%;
+}
 .bg-w{
   background: snow;
 }
@@ -68,4 +79,7 @@
   display: flex;
   height: 3rem;
   align-items: center;
+}
+.userView{
+  border: 1px solid red;
 }
