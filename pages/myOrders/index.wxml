@@ -42,7 +42,10 @@
                   </block>
                   <block wx:if='{{item.billsType === 2}}'>
                       <view class="td" style="color:#ccc" >已结算</view>
-                  </block>                   
+                  </block>           
+                  <block wx:if='{{item.billsType === 3}}'>
+                      <view class="td" style="color:#ccc" >已赔付</view>
+                  </block>            
               </view>            
             </view>
             <view class="tr bg-h" wx:else>
