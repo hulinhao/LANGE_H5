@@ -56,7 +56,6 @@ Page({
     })
     wx.getSetting({
       success(res){
-        log.info('getSetting:'+JSON.stringify(res));
         if (res.authSetting['scope.userInfo']) {
           wx.login({
               success: res => {
@@ -85,7 +84,8 @@ Page({
                         success: function(res) {
                           if(res.data.status == 1){ //接口请求成功
                             var user = res.data.user;
-                            console.log('登陆成功，角色：'+user.type);
+                            log.info('登陆成功，微信名：'+user.wxName+';type：'+user.type);
+                            console.log('登陆成功，微信名：'+user.wxName+';type：'+user.type);
                             //用户信息保存到全局变量
                             self.globalData.userInfo={
                               userId:user.id,
@@ -116,7 +116,7 @@ Page({
                               icon: 'none',
                               duration: 1500
                             })
-                            console.log('解密失败')
+                            log.info('解密失败')
                           }            
                           that.setData({
                             loading : !that.data.loading
@@ -128,7 +128,7 @@ Page({
                               icon: 'none',
                               duration: 1500
                             })
-                            console.log('系统错误！')
+                            log.info('系统错误！')
                             that.setData({
                               loading : !that.data.loading
                             })
@@ -136,14 +136,14 @@ Page({
                       })
                     },
                     fail: function () {
-                      console.log('获取用户信息失败')
+                      log.info('获取用户信息失败')
                       that.setData({
                         loading : !that.data.loading
                       })
                     }
                   })
                 } else {
-                  console.log('获取用户登录态失败！' + r.errMsg)
+                  log.info('获取用户登录态失败！' + r.errMsg)
                   that.setData({
                     loading : !that.data.loading
                   })
@@ -151,7 +151,7 @@ Page({
               },
               fail: function () {
                 log.info('登陆失败')
-                console.log('登陆失败')
+                //console.log('登陆失败')
                 that.setData({
                   loading : !that.data.loading
                 })
@@ -159,7 +159,7 @@ Page({
             })
         } else {          
           log.info('获取用户信息失败')
-          console.log('获取用户信息失败')
+          //console.log('获取用户信息失败')
         }
       }
     })
