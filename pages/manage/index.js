@@ -229,5 +229,9 @@ Page({
         }
       })
     },
+    payOrder:function(){
+      console.log('支付开始');
+      console.log('支付结束');
+    },
 })
 
