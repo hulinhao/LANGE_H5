@@ -76,7 +76,7 @@ Page({
           }
           if(orderList != null){
             orderList.forEach(element=>{
-              if(element.userId == id){
+              if(element.billsId == id){
                 if(element.color == "#1AAD19"){
                    element.color = "#ccc";
                  }else if(element.color == "#ccc"){
